@@ -1,0 +1,15 @@
+.notes-sidebar{
+    display: flex;
+    flex-direction: column;
+}
+
+.inline-item{
+    display: inline-flex;
+    align-items: center;
+    line-height: 3;
+}
+
+.sidebar-icon{
+    width: 25px;
+    height: 25px;
+}
