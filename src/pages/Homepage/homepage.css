@@ -1,0 +1,15 @@
+.col-1{
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 2;
+}
+.col-2{
+    background-color: transparent;
+}
+
+.login-link{
+    line-height: 3;
+}
