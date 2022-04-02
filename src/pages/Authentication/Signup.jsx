@@ -169,8 +169,8 @@ export default function Signup() {
           </section>
           <input
             type="submit"
-            className="btn btn-solid-primary margin"
-            value="Create New Account"
+            className="btn btn-solid-primary margin authenticate-signup"
+            value="SignUp"
           />
         </form>
       </div>

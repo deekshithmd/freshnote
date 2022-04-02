@@ -58,13 +58,13 @@ export default function Login() {
           </section>
           <input
             type="submit"
-            className="btn btn-solid-primary margin"
+            className="btn btn-solid-primary margin authenticate-login"
             value="Login"
           />
         </form>
-        <p className="text-lg">
+        <p className="text-md">
           <Link to="/signup" className=" link-style-none">
-            Create New Account?
+            Don't have Account?, Click here
             <i className="fa fa-angle-right margin-l"></i>
           </Link>
         </p>
