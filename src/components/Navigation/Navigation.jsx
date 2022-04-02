@@ -27,16 +27,18 @@ export const Navigation = () => {
             </Link>
           </li>
         )}
-        <li className="list-inline-item">
+        
+        {token && (
+          <>
+          <li className="list-inline-item">
           <div
             className="avatar avatar-text-xs avatar-text img-round user-profile"
             role="img"
             alt="Avatar"
           >
-            AB
+            MD
           </div>
         </li>
-        {token && (
           <li className="list-inline-item">
             <button
               className="btn btn-icon-primary user-signout" onClick={()=>LogoutHandler()}
@@ -46,6 +48,7 @@ export const Navigation = () => {
               </Link>
             </button>
           </li>
+          </>
         )}
       </ul>
     </nav>

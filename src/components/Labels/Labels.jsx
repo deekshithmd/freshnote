@@ -1,12 +1,7 @@
 import "../Notes/notes.css";
 import "./label.css";
-import search from "../../assets/icons/search.svg";
 import pinned from "../../assets/icons/pinned.svg";
-import paint from "../../assets/icons/paint-board.svg";
-import label from "../../assets/icons/label.svg";
-import remove from "../../assets/icons/delete.svg";
-import archive from "../../assets/icons/archive.svg";
-import edit from "../../assets/icons/edit.svg";
+import pin from "../../assets/icons/pin.svg";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { v4 as uuid } from "uuid";
 import { useData } from "../../contexts";
@@ -80,31 +75,13 @@ export const Labels = () => {
               >
                 <div className="note-header">
                   <h4 className="text-md">{item.title}</h4>
-                  <img src={pinned} className="pin action-icon" alt="pin" />
+                  <img src={item.pinned?pinned:pin} className="pin action-icon" alt="pin" />
                 </div>
                 <div className="note-body text-sm text-justify">
                   {item.body}
                 </div>
                 <div className="note-footer text-sm margin-t margin-b">
                   <div className="date">Created on {item.date}</div>
-                  <div className="action-icons margin-r">
-                    <img
-                      src={edit}
-                      className="action-icon margin-r"
-                      alt="edit"
-                    />
-                    <img
-                      src={archive}
-                      className="action-icon margin-r"
-                      alt="archive"
-                    />
-                    <img
-                      src={label}
-                      className="action-icon margin-r"
-                      alt="label"
-                    />
-                    <img src={remove} className="action-icon" alt="delete" />
-                  </div>
                 </div>
               </div>
             );

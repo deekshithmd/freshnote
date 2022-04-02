@@ -15,8 +15,9 @@ export const Archives = () => {
     dispatch({ type: "LOAD_ARCHIVES", payload: res.data.archives });
   };
 
-  const deleteArchive = async (id, t) => {
-    const res = await deleteArchives({ noteId: id, encodedToken: t });
+  const deleteArchive = async (item, t) => {
+    dispatch({ type: "ADD_TRASH", payload: item });
+    const res = await deleteArchives({ noteId: item._id, encodedToken: t });
     dispatch({ type: "LOAD_ARCHIVES", payload: res.data.archives });
   };
 
@@ -56,7 +57,7 @@ export const Archives = () => {
                       src={remove}
                       className="action-icon"
                       alt="delete"
-                      onClick={() => deleteArchive(item._id, token)}
+                      onClick={() => deleteArchive(item, token)}
                     />
                   </div>
                 </div>
