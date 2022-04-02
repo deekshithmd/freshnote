@@ -2,6 +2,7 @@ import "./authentication.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+
 export default function Signup() {
   const navigate = useNavigate();
 
@@ -9,6 +10,31 @@ export default function Signup() {
   const [password, setPassword] = useState();
   const [passwordValue, setPasswordvalue] = useState();
   const [confirm, setConfirm] = useState();
+
+  const HandleSignup = async (event) => {
+    try {
+      event.preventDefault();
+      const { firstname, lastname, email, pass } = event.target.elements;
+      console.log(firstname.value, lastname.value, email.value, pass.value);
+      const response = await axios.post(`/api/auth/signup`, {
+        firstname: firstname.value,
+        lastname: lastname.value,
+        email: email.value,
+        password: pass.value,
+      });
+      console.log(response.data);
+      if (response.data.encodedToken) {
+        localStorage.setItem(
+          "token",
+          JSON.stringify(response.data.encodedToken)
+        );
+        navigate("/login");
+      }
+    } catch (e) {
+      console.log(e);
+      console.log("signup");
+    }
+  };
 
   function checkEmail(e) {
     let regEmail =
