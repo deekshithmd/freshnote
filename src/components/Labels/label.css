@@ -1,0 +1,15 @@
+.labels {
+    display: flex;
+    justify-content: flex-start;
+    width: 70rem;
+    flex-wrap: wrap;
+}
+
+.add-tag {
+    margin: 1.5rem auto;
+}
+
+.chip {
+    height: 3.5rem;
+    margin: 1rem;
+}

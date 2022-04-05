@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
-*{
+
+* {
     font-family: 'Calistoga', cursive;
 }
-.brand{
-    line-height: 13vh;
+
+.brand {
+    line-height: 9rem;
     text-decoration: none;
 }

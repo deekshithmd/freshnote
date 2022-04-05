@@ -1,0 +1,23 @@
+.search-bar {
+    border: 1px solid black;
+    width: 30rem;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.modal-container{
+    display: flex;
+}
+
+.modal-header{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+}
+
+.searchbar-icon{
+    font-size: 2rem;
+    color:green
+}

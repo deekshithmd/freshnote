@@ -4,4 +4,5 @@ import { Notes } from "./Notes/Notes";
 import { Trash } from "./Trash/Trash";
 import { Archives } from "./Archives/Archives";
 import { Labels } from "./Labels/Labels";
-export { Navigation, Siderbar, Notes, Trash, Archives, Labels };
+import { SearchBar } from "./SearchBar/SearchBar";
+export { Navigation, Siderbar, Notes, Trash, Archives, Labels, SearchBar };

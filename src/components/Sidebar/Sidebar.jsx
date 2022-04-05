@@ -1,3 +1,4 @@
+import "./sidebar.css";
 import React from "react";
 import archived from "../../assets/icons/archived.svg";
 import trash from "../../assets/icons/trash.svg";
@@ -5,8 +6,12 @@ import profile from "../../assets/icons/profile.svg";
 import label from "../../assets/icons/labels.svg";
 import home from "../../assets/icons/home.svg";
 import { Link } from "react-router-dom";
-import "./sidebar.css";
+import { useData } from "../../contexts";
+import { useNavigate } from "react-router-dom";
+
 export const Siderbar = () => {
+  const navigate=useNavigate()
+  const { setNote } = useData();
   return (
     <>
       <ul className="list-style-none notes-sidebar">
@@ -44,7 +49,7 @@ export const Siderbar = () => {
             Profile
           </Link>
         </li>
-        <button className="btn btn-solid-primary">Create New Note</button>
+        <button className="btn btn-solid-primary" onClick={()=>{setNote(true);navigate("/notes")}}>Create New Note</button>
       </ul>
     </>
   );

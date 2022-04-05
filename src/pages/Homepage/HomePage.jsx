@@ -13,7 +13,7 @@ export const HomePage = () => {
           </h1>
           <h3>Do you feel difficulty in keeping record of notes?</h3>
           <h2>Then we are here for you...</h2>
-          <Link to="/notes">
+          <Link to="/signup">
             <button className="btn btn-solid-primary">Join Now</button>
           </Link>
           <Link to="/login" className="link-style-none text-md login-link">

@@ -26,3 +26,11 @@
 .form-input-message{
     width: 25rem;
 }
+
+.authenticate-login{
+   margin-left: 10rem;
+}
+
+.authenticate-signup{
+    margin-left: 9rem;
+ }

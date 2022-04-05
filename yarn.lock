@@ -3329,10 +3329,10 @@
     "whatwg-mimetype" "^2.3.0"
     "whatwg-url" "^8.0.0"
 
-"dayjs@^1.10.7":
-  "integrity" "sha512-P6twpd70BcPK34K26uJ1KT3wlhpuOAPoMwJzpsIWUxHZ7wpmbdZL/hQqBDfz7hGurYSa5PhzdhDHtt319hL3ig=="
-  "resolved" "https://registry.npmjs.org/dayjs/-/dayjs-1.10.7.tgz"
-  "version" "1.10.7"
+"dayjs@^1.11.0":
+  "integrity" "sha512-JLC809s6Y948/FuCZPm5IX8rRhQwOiyMb2TfVVQEixG7P8Lm/gt5S7yoQZmC8x1UehI9Pb7sksEt4xx14m+7Ug=="
+  "resolved" "https://registry.npmjs.org/dayjs/-/dayjs-1.11.0.tgz"
+  "version" "1.11.0"
 
 "debug@^2.6.0":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
@@ -6100,7 +6100,7 @@
   "resolved" "https://registry.npmjs.org/minimist/-/minimist-1.2.6.tgz"
   "version" "1.2.6"
 
-"miragejs@^0.1.42":
+"miragejs@^0.1.43":
   "integrity" "sha512-BhkyxssOZ2i4JqRjWpRnUQu9AFAKHyft8dJbqsg/N64+gCn2vw6vRteMpTKXllLjCPOA9Os8PhGRVXlXs4Ojhw=="
   "resolved" "https://registry.npmjs.org/miragejs/-/miragejs-0.1.43.tgz"
   "version" "0.1.43"

@@ -1,124 +1,309 @@
 import "./notes.css";
-import search from "../../assets/icons/search.svg";
+import { useNavigate } from "react-router-dom";
 import pinned from "../../assets/icons/pinned.svg";
-import label from "../../assets/icons/label.svg";
+import pin from "../../assets/icons/pin.svg";
+import tag from "../../assets/icons/label.svg";
 import remove from "../../assets/icons/delete.svg";
 import archive from "../../assets/icons/archive.svg";
-import edit from "../../assets/icons/edit.svg";
+import edits from "../../assets/icons/edit.svg";
 import paint from "../../assets/icons/paint-board.svg";
+import { SearchBar } from "../SearchBar/SearchBar";
+import { useData } from "../../contexts";
+import { useState } from "react";
+import {
+  addArchives,
+  addNotes,
+  deleteNotes,
+  updateNotes,
+} from "../../services";
 
 export const Notes = () => {
+  const { note, setNote, colors, dispatch, data } = useData();
+  const [edit, setEdit] = useState(false);
+  const [label, setLabel] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [editId, setEditId] = useState("");
+  const [editData, setEditData] = useState("");
+  const [tags, setTags] = useState([]);
+  const token = localStorage.getItem("login");
+  const navigate = useNavigate();
+
+  const addNote = async (e) => {
+    setNote(false);
+    setLabel(false);
+    e.preventDefault();
+    const { notetitle, notebody } = e.target.elements;
+    const notes = {
+      title: notetitle.value,
+      body: notebody.value,
+      tags: tags,
+      pinned: false,
+      colorIndex: index,
+      date: new Date().toLocaleDateString(),
+    };
+    setTags([]);
+    const res = await addNotes({ note: notes, encodedToken: token });
+    dispatch({ type: "LOAD_NOTES", payload: res.data.notes });
+  };
+
+  const deleteNote = async (item, t) => {
+    dispatch({ type: "ADD_TRASH", payload: item });
+    const res = await deleteNotes({ notesId: item._id, encodedToken: t });
+    dispatch({ type: "LOAD_NOTES", payload: res.data.notes });
+  };
+
+  const addArchive = async (n, t) => {
+    const res = await addArchives({ note: n, noteId: n._id, encodedToken: t });
+    dispatch({ type: "LOAD_NOTES", payload: res.data.notes });
+    dispatch({ type: "LOAD_ARCHIVES", payload: res.data.archives });
+  };
+
+  const editClick = (item) => {
+    setEdit(true);
+    setEditId(item._id);
+    setEditData(item);
+  };
+
+  const updateNote = async (e) => {
+    setEdit(false);
+    setEditId("");
+    setEditData("");
+    setLabel(false);
+    e.preventDefault();
+    const { notetitle, notebody, notelabel } = e.target.elements;
+    const notes = {
+      title: notetitle.value,
+      body: notebody.value,
+      tags: [notelabel ? notelabel.value : ""],
+      colorIndex: editData.colorIndex,
+      date: new Date().toLocaleDateString(),
+    };
+    const res = await updateNotes({
+      note: notes,
+      notesId: editId,
+      encodedToken: token,
+    });
+    dispatch({ type: "LOAD_NOTES", payload: res.data.notes });
+  };
+
+  const pinnedNote = async (item) => {
+    const notes = {
+      ...item,
+      pinned: item.pinned === true ? false : true,
+    };
+    const res = await updateNotes({
+      note: notes,
+      notesId: item._id,
+      encodedToken: token,
+    });
+    dispatch({ type: "LOAD_NOTES", payload: res.data.notes });
+  };
+
+  const getLabel = (e) => {
+    const l = tags.concat(e.target.innerText);
+    setTags(l);
+  };
+
   return (
     <>
-      <div className="search-bar">
-        <img src={search} className="sidebar-icon margin-r" alt="f" />
-        <input type="search" placeholder="Search here..." />
-      </div>
+      <SearchBar />
       <div className="notes-container">
-        <h2>Create Note</h2>
-        <form autoComplete="off" className="note margin-t margin-b">
-          <div className="note-header">
-            <h4 className="text-md">
+        {note && (
+          <>
+            <h2>Create Note</h2>
+            <form
+              onSubmit={addNote}
+              autoComplete="off"
+              className="note margin-t margin-b"
+              style={{ backgroundColor: colors[index] }}
+            >
+              <div className="note-header">
+                <h4 className="text-md">
+                  <input
+                    type="text"
+                    name="notetitle"
+                    placeholder="Enter title here..."
+                    className="margin-l note-title text-lg"
+                  />
+                </h4>
+              </div>
+              <div className="note-body text-sm text-justify">
+                <textarea
+                  placeholder="Enter notes body here..."
+                  className="notes-body"
+                  name="notebody"
+                  style={{ backgroundColor: colors[index] }}
+                ></textarea>
+              </div>
+              {label && (
+                <div className="label-chips">
+                  {data.labels &&
+                    data.labels.map((label) => {
+                      return (
+                        <span key={label._id}>
+                          <span className="chip text-chip" onClick={getLabel}>
+                            {label.tag}
+                          </span>
+                        </span>
+                      );
+                    })}
+                </div>
+              )}
+              <div className="note-footer text-sm margin-t margin-b">
+                <div className="date">
+                  Created on {new Date().toLocaleDateString()}
+                </div>
+                <div className="action-icons margin-r">
+                  <img
+                    src={paint}
+                    className="action-icon margin-r"
+                    alt="paint"
+                    onClick={() => {
+                      setIndex(Math.floor(Math.random() * 7));
+                    }}
+                  />
+                  <img
+                    src={tag}
+                    className="action-icon margin-r"
+                    alt="label"
+                    onClick={() => setLabel(true)}
+                  />
+                </div>
+              </div>
               <input
-                type="text"
-                name="notetitle"
-                placeholder="Enter title here..."
-                className="margin-l note-title text-lg"
+                type="submit"
+                className="btn btn-solid-primary"
+                value="Save Note"
               />
-            </h4>
-          </div>
-          <div className="note-body text-sm text-justify">
-            <textarea
-              placeholder="Enter notes body here..."
-              className="notes-body"
-              name="notebody"
-            ></textarea>
-          </div>
-          <input type="text" name="notelabel" placeholder="Enter tag here..." />
-          <div className="note-footer text-sm margin-t margin-b">
-            <div className="date">31/03/2022</div>
-            <div className="action-icons margin-r">
-              <img src={paint} className="action-icon margin-r" alt="paint" />
-              <img src={label} className="action-icon margin-r" alt="label" />
-            </div>
-          </div>
-          <input
-            type="submit"
-            className="btn btn-solid-primary"
-            value="Save Note"
-          />
-        </form>
-        <form
-          autoComplete="off"
-          className="note margin-t margin-b"
-        >
-          <div className="note-header">
-            <h4 className="text-md">
-              <input
-                type="text"
-                name="notetitle"
-                value="Title here"
-                className="margin-l note-title text-lg"
-              />
-            </h4>
-          </div>
-          <div className="note-body text-sm text-justify">
-            <textarea
-              value="body here"
-              className="notes-body"
-              name="notebody"
-            ></textarea>
-          </div>
-
-          <input
-            type="text"
-            name="notelabel"
-            value="label1"
-            placeholder="Enter tag here..."
-          />
-          <div className="note-footer text-sm margin-t margin-b">
-            <div className="date">31/03/2022</div>
-            <div className="action-icons margin-r">
-              <img src={paint} className="action-icon margin-r" alt="paint" />
-              <img src={label} className="action-icon margin-r" alt="label" />
-            </div>
-          </div>
-          <input
-            type="submit"
-            className="btn btn-solid-primary"
-            value="Update Note"
-          />
-        </form>
+            </form>
+          </>
+        )}
         <h1>Notes</h1>
-        <div className="note margin-t margin-b">
-          <div className="note-header">
-            <h4 className="text-md">Title1</h4>
+        {data.notes &&
+          data.notes.map((item) => {
+            return editId === item._id ? (
+              edit && (
+                <form
+                  onSubmit={updateNote}
+                  autoComplete="off"
+                  className="note margin-t margin-b"
+                  style={{ backgroundColor: colors[editData.colorIndex] }}
+                >
+                  <div className="note-header">
+                    <h4 className="text-md">
+                      <input
+                        type="text"
+                        name="notetitle"
+                        value={editData.title}
+                        className="margin-l note-title text-lg"
+                        onChange={(e) =>
+                          setEditData({ ...editData, title: e.target.value })
+                        }
+                      />
+                    </h4>
+                  </div>
+                  <div className="note-body text-sm text-justify">
+                    <textarea
+                      value={editData.body}
+                      className="notes-body"
+                      name="notebody"
+                      style={{ backgroundColor: colors[editData.colorIndex] }}
+                      onChange={(e) =>
+                        setEditData({ ...editData, body: e.target.value })
+                      }
+                    ></textarea>
+                  </div>
 
-            <img src={pinned} className="pin action-icon" alt="f" />
-          </div>
-          <div className="note-body text-sm text-justify">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages
-          </div>
-          <div className="note-footer text-sm margin-t margin-b">
-            <div className="date">Created on 31/03/2022</div>
-            <div className="action-icons margin-r">
-              <img src={edit} className="action-icon margin-r" alt="edit" />
-              <img
-                src={archive}
-                className="action-icon margin-r"
-                alt="archive"
-              />
-              <img src={label} className="action-icon margin-r" alt="label" />
-              <img src={remove} className="action-icon" alt="delete" />
-            </div>
-          </div>
-        </div>
+                  {label && (
+                    <input
+                      type="text"
+                      name="notelabel"
+                      value={editData.tags[0]}
+                      placeholder="Enter tag here..."
+                      onChange={(e) =>
+                        setEditData({ ...editData, tags: [e.target.value] })
+                      }
+                    />
+                  )}
+                  <div className="note-footer text-sm margin-t margin-b">
+                    <div className="date">
+                      Created on {new Date().toLocaleDateString()}
+                    </div>
+                    <div className="action-icons margin-r">
+                      <img
+                        src={paint}
+                        className="action-icon margin-r"
+                        alt="paint"
+                        onClick={() => {
+                          setIndex(Math.floor(Math.random() * 7));
+                        }}
+                      />
+                      <img
+                        src={tag}
+                        className="action-icon margin-r"
+                        alt="label"
+                        onClick={() => setLabel(true)}
+                      />
+                    </div>
+                  </div>
+                  <input
+                    type="submit"
+                    className="btn btn-solid-primary"
+                    value="Update Note"
+                  />
+                </form>
+              )
+            ) : (
+              <div
+                className="note margin-t margin-b"
+                key={item._id}
+                style={{ backgroundColor: colors[item.colorIndex] }}
+              >
+                <div className="note-header">
+                  <h4 className="text-md">{item.title}</h4>
+
+                  <img
+                    src={item.pinned ? pinned : pin}
+                    className="pin action-icon"
+                    alt="pin"
+                    onClick={() => pinnedNote(item)}
+                  />
+                </div>
+                <div className="note-body text-sm text-justify">
+                  {item.body}
+                </div>
+                <div className="note-footer text-sm margin-t margin-b">
+                  <div className="date">Created on {item.date}</div>
+                  <div className="action-icons margin-r">
+                    <img
+                      src={edits}
+                      className="action-icon margin-r"
+                      alt="edit"
+                      onClick={() => editClick(item)}
+                    />
+                    <img
+                      src={archive}
+                      className="action-icon margin-r"
+                      alt="archive"
+                      onClick={() => addArchive(item, token)}
+                    />
+                    <img
+                      src={tag}
+                      className="action-icon margin-r"
+                      alt="label"
+                      onClick={() => navigate("/labels")}
+                    />
+                    <img
+                      src={remove}
+                      className="action-icon"
+                      alt="delete"
+                      onClick={() => deleteNote(item, token)}
+                    />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
       </div>
     </>
   );
