@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# FreshNote
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of contents
+* [About](#about)
+* [Features](#features)
+* [Installation](#installation)
 
-## Available Scripts
+## About
+FreshNote is a note taking application where you can create notes with heading and body and also you can add labels to determine what kind of notes that is.
 
-In the project directory, you can run:
+## Features
 
-### `yarn start`
+1. Navigation bar
+    * There is a Logo text, on clicking this if user logged in then navigates to notes homepage or to application homepage
+    * Profile icon present in the navigation bar, as of now functionality not added
+    * Login and logout buttons appear based on the condition
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2. Application Home page<br>
+    Here there are two CTA's provided one asks to join if not signed up and another asks to login
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. Notes Homepage
+    * Searchbar provided along with filter functionality
+    * Displays notes based on the category like pinned or not pinned
+    * Creating notes
+    * Updating/Editing notes
+    * Archive notes
+ 
+ 4. Labels<br>
+    This page shows different tags available, on clicking perticular tag it displays related notes
+ 
+ 5. Archives
+    * Displays archived notes
+    * Deleted archived notes
+    * Unarchive the notes
+ 
+ 6. Trash
+    * Dispays trashed notes
+    * Restore notes
+    * Permanently delete notes
+ 
+ 7. Create Notes<br>
+    On clicking this text editor opens to add notes
+ 
+## Installation
+   * Clone the repository on local machine using the following command and change directory
+      ```
+      git clone https://github.com/deekshithmd/freshnote.git
+      
+      cd freshnote
+      ```
+   * Install missing dependencies
+      ```
+      nmp install
+      ```
+   * Run the application
+      ```
+      npm start
+      ```
+  
