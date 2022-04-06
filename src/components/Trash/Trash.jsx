@@ -2,6 +2,7 @@ import "../Notes/notes.css";
 import pinned from "../../assets/icons/pinned.svg";
 import archive from "../../assets/icons/archive.svg";
 import restore from "../../assets/icons/restore.svg";
+import deleten from "../../assets/icons/trash.svg";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { useData } from "../../contexts";
 import { addNotes, addArchives } from "../../services";
@@ -17,7 +18,6 @@ export const Trash = () => {
 
   const addArchive = async (n, t) => {
     const res = await addArchives({ note: n, noteId: n._id, encodedToken: t });
-    //console.log(res.data);
     dispatch({ type: "DELETE_TRASH", payload: n._id });
     dispatch({ type: "LOAD_ARCHIVES", payload: res.data.archives });
   };
@@ -58,6 +58,7 @@ export const Trash = () => {
                       alt="delete"
                       onClick={() => restoreNote(item, token)}
                     />
+                    <img src={deleten} className="action-icon" alt="delete" onClick={()=>dispatch({type:"DELETE_TRASH",payload:item._id})}/>
                   </div>
                 </div>
               </div>

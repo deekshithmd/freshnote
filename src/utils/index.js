@@ -1,3 +1,3 @@
-import {getCredentials} from "./utils"
+import { getCredentials, getTestData } from "./utils";
 
-export {getCredentials}
+export { getCredentials, getTestData };

@@ -9,6 +9,8 @@ export const Navigation = () => {
   const navigate = useNavigate();
   const LogoutHandler = () => {
     localStorage.removeItem("login");
+    localStorage.removeItem("notes");
+    localStorage.removeItem("archives");
     setToken(false);
     navigate("/");
   };

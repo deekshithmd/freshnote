@@ -1,9 +1,24 @@
 import "./searchbar.css";
 import { useState } from "react";
+import { useData } from "../../contexts";
 export const SearchBar = () => {
   const [modal, setModal] = useState(false);
   const [filter, setFilter] = useState();
-  const [sort, setSort] = useState();
+  const { data, dispatch } = useData();
+
+  const getFiltered = (filterv, datav) => {
+    setModal(false);
+    const filtered = datav.filter((item) =>
+      item.tags.some((i) => (i === filterv ? true : false))
+    );
+    dispatch({ type: "FILTER", payload: filtered });
+  };
+
+  const reset = (datav) => {
+    setModal(false);
+    dispatch({ type: "FILTER", payload: [] });
+  };
+
   return (
     <>
       <div className="search-bar">
@@ -18,37 +33,34 @@ export const SearchBar = () => {
         <div className="modal-container">
           <div className="modal">
             <section className="modal-header">
-              <p className="subtitle-2 text-bold">Sort & Filter Notes</p>
-              <i className="fa-solid fa-xmark" onClick={() => setModal(false)}></i>
+              <p className="subtitle-2 text-bold">Filter Notes</p>
+              <i
+                className="fa-solid fa-xmark"
+                onClick={() => setModal(false)}
+              ></i>
             </section>
             <section className="modal-content text-md">
-              <p>Sort By</p>
-              <select value={sort} onChange={(e) => setSort(e.target.value)}>
-                <option value="Newest First">Newest First</option>
-                <option value="Oldest First">Oldest First</option>
-              </select>
               <p>Filter By</p>
               <select
                 value={filter}
                 onChange={(e) => setFilter(e.target.value)}
               >
-                <option>Label1</option>
-                <option>Label2</option>
-                <option>Label3</option>
+                <option>College</option>
+                <option>Reminder</option>
+                <option>Work</option>
               </select>
-              {filter === "Label1" ? (
-                <div>
-                  <input type="checkbox" />
-                  Label1
-                  <input type="checkbox" />
-                  Label2
-                </div>
-              ) : (
-                ""
-              )}
             </section>
             <section className="modal-actions">
-              <button className="btn btn-solid-primary margin-l close-modal">
+              <button
+                className="btn btn-solid-primary margin-l close-modal"
+                onClick={() => reset(data.notes)}
+              >
+                Reset
+              </button>
+              <button
+                className="btn btn-solid-primary margin-l close-modal"
+                onClick={() => getFiltered(filter, data.notes)}
+              >
                 Done
               </button>
             </section>
