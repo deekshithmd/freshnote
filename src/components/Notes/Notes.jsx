@@ -183,7 +183,7 @@ export const Notes = () => {
         {filtereddata &&
           filtereddata.map((item) => {
             return editId === item._id ? (
-              edit && (
+              edit && item.pinned && (
                 <form
                   onSubmit={updateNote}
                   autoComplete="off"

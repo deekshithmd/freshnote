@@ -1,5 +1,6 @@
 import "../Notes/notes.css";
 import pinned from "../../assets/icons/pinned.svg";
+import pin from "../../assets/icons/pin.svg";
 import archive from "../../assets/icons/archive.svg";
 import restore from "../../assets/icons/restore.svg";
 import deleten from "../../assets/icons/trash.svg";
@@ -16,11 +17,11 @@ export const Trash = () => {
     dispatch({ type: "LOAD_NOTES", payload: res.data.notes });
   };
 
-  const addArchive = async (n, t) => {
-    const res = await addArchives({ note: n, noteId: n._id, encodedToken: t });
-    dispatch({ type: "DELETE_TRASH", payload: n._id });
-    dispatch({ type: "LOAD_ARCHIVES", payload: res.data.archives });
-  };
+  // const addArchive = async (n, t) => {
+  //   const res = await addArchives({ note: n, noteId: n._id, encodedToken: t });
+  //   dispatch({ type: "DELETE_TRASH", payload: n._id });
+  //   dispatch({ type: "LOAD_ARCHIVES", payload: res.data.archives });
+  // };
 
   return (
     <>
@@ -37,28 +38,41 @@ export const Trash = () => {
               >
                 <div className="note-header">
                   <h4 className="text-md">{item.title}</h4>
-                  <img src={pinned} className="pin action-icon" alt="pin" />
+                  <img
+                    src={item.pinned ? pinned : pin}
+                    className="pin action-icon"
+                    alt="pin"
+                  />
                 </div>
                 <div className="note-body text-sm text-justify">
                   {item.body}
                 </div>
-                <div className="text-left tag margin-t">{item.tags[0]}</div>
+                {item.tags.length > 0 && (
+                  <div className="text-left tag margin-t">{item.tags[0]}</div>
+                )}
                 <div className="note-footer text-sm margin-t margin-b">
                   <div className="date">Created on {item.date}</div>
                   <div className="action-icons margin-r">
-                    <img
+                    {/* <img
                       src={archive}
                       className="action-icon margin-r"
                       alt="archive"
                       onClick={() => addArchive(item, token)}
-                    />
+                    /> */}
                     <img
                       src={restore}
-                      className="action-icon"
+                      className="action-icon margin-r"
                       alt="delete"
                       onClick={() => restoreNote(item, token)}
                     />
-                    <img src={deleten} className="action-icon" alt="delete" onClick={()=>dispatch({type:"DELETE_TRASH",payload:item._id})}/>
+                    <img
+                      src={deleten}
+                      className="action-icon"
+                      alt="delete"
+                      onClick={() =>
+                        dispatch({ type: "DELETE_TRASH", payload: item._id })
+                      }
+                    />
                   </div>
                 </div>
               </div>

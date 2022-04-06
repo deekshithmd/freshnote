@@ -13,7 +13,7 @@ export const Siderbar = () => {
         <li className="inline-item text-md">
           <Link to="/notes" className="link-style-none">
             <i className="fa-solid fa-house-chimney sidebar-icon margin-r"></i>
-            Home
+            Notes
           </Link>
         </li>
 
@@ -39,7 +39,7 @@ export const Siderbar = () => {
         </li>
 
         <li className="inline-item text-md">
-          <Link to="/" className="link-style-none">
+          <Link to="/error" className="link-style-none">
             <i className="fa-solid fa-user-large sidebar-icon margin-r"></i>
             Profile
           </Link>

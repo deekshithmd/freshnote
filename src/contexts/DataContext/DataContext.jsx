@@ -58,7 +58,7 @@ const DataProvider = ({ children }) => {
   }, []);
 
   const filtereddata = data.filtered.length > 0 ? data.filtered : data.notes;
-
+  
   return (
     <DataContext.Provider
       value={{

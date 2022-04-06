@@ -6,7 +6,7 @@ export const DataReducer = (state, action) => {
     case "LOAD_ARCHIVES":
       localStorage.setItem("archives", JSON.stringify(action.payload));
       return { ...state, archives: action.payload };
-    case "PINNED":
+    case "PINNOTE":
       return { ...state, pinned: [...state.pinned, action.payload] };
     case "REMOVEPIN":
       return {

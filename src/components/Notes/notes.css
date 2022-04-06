@@ -8,13 +8,13 @@
     align-items: center;
     justify-content: center;
     border: 1px solid var(--primary-color);
-    width: 70rem;
+    width: 100%;
     margin: 5rem auto;
     border-radius: 5px;
 }
 
 .note{
-    background-color: white;
+    background-color: var(--white-background);
     border-radius: 5px;
     width: 50rem;
     padding: 0 15px;
@@ -23,6 +23,7 @@
 .note-header{
     display: flex;
     justify-content: space-between;
+    color: var(--black-text-color);
 }
 
 .action-icon{
@@ -33,6 +34,7 @@
 
 .note-body{
     line-height: 1.5;
+    color: var(--black-text-color);
 }
 
 .note-footer{
@@ -46,8 +48,13 @@
     justify-content: space-around; 
 }
 
+.note-title{
+    color: var(--black-text-color);
+}
+
 textarea{
     border: none;
+    color: var(--black-text-color);
 }
 
 .note-title{
@@ -56,6 +63,7 @@ textarea{
 
 .notes-body{
     width: 100%;
+    color: var(--black-text-color);
 }
 
 .tag{
@@ -64,15 +72,21 @@ textarea{
     padding: 5px;
     font-size: 1rem;
     width: fit-content;
+    color: var(--black-text-color);
 }
 
 .chip{
     font-size: 1.5rem;
     padding: 10px;
+    color: var(--black-text-color);
 }
 
 .label-chips{
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+}
+
+.date{
+    color: var(--black-text-color);
 }

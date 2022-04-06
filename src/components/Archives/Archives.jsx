@@ -1,5 +1,6 @@
 import "../Notes/notes.css";
 import pinned from "../../assets/icons/pinned.svg";
+import pin from "../../assets/icons/pin.svg";
 import remove from "../../assets/icons/delete.svg";
 import archived from "../../assets/icons/archived.svg";
 import { SearchBar } from "../SearchBar/SearchBar";
@@ -36,7 +37,7 @@ export const Archives = () => {
               >
                 <div className="note-header">
                   <h4 className="text-md">{item.title}</h4>
-                  <img src={pinned} className="pin action-icon" alt="pin" />
+                  <img src={item.pinned?pinned:pin} className="pin action-icon" alt="pin" />
                 </div>
                 <div className="note-body text-sm text-justify">
                   {item.body}
