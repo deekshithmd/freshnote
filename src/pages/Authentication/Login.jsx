@@ -12,7 +12,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState(false);
 
-  const TestLogin=async()=>{
+  const testLogin=async()=>{
     try{
       const response = await axios.post(
         "/api/auth/login",
@@ -34,7 +34,7 @@ export default function Login() {
     }
   }
 
-  const HandleLogin = async (event) => {
+  const handleLogin = async (event) => {
     try {
       event.preventDefault();
       const { email, password } = event.target.elements;
@@ -61,7 +61,7 @@ export default function Login() {
       <div className="form-data">
         {error && <h3>Wrong credentials</h3>}
         <h2 className="margin-b">Login</h2>
-        <form autoComplete="off" onSubmit={HandleLogin}>
+        <form autoComplete="off" onSubmit={handleLogin}>
           <div className="input input-labeled outlined margin">
             <label className="label">Enter Email Address</label>
             <input type="email" name="email" placeholder="freshbuy@gmail.com" />
@@ -85,7 +85,7 @@ export default function Login() {
             value="Login"
           />
         </form>
-        <button className="btn btn-solid-primary margin" onClick={TestLogin}>
+        <button className="btn btn-solid-primary margin" onClick={testLogin}>
           Test User Login
         </button>
         <p className="text-md">
