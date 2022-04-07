@@ -4,6 +4,7 @@
 * [About](#about)
 * [Features](#features)
 * [Installation](#installation)
+* [Walkthrough](#walkthrough)
 
 ## About
 FreshNote is a note taking application where you can create notes with heading and body and also you can add labels to determine what kind of notes that is.
@@ -13,7 +14,7 @@ FreshNote is a note taking application where you can create notes with heading a
 1. Navigation bar
     * There is a Logo text, on clicking this if user logged in then navigates to notes homepage or to application homepage
     * Profile icon present in the navigation bar, as of now functionality not added
-    * Login and logout buttons appear based on the condition
+    * Login and logout buttons appear based on the user's state
 
 2. Application Home page<br>
     Here there are two CTA's provided one asks to join if not signed up and another asks to login
@@ -56,4 +57,7 @@ FreshNote is a note taking application where you can create notes with heading a
       ```
       npm start
       ```
+      
+ ## Walkthrough
+ ![FreshNote](https://github.com/deekshithmd/Data/blob/main/Gifs/freshnote.gif)
   
