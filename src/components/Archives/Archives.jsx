@@ -3,7 +3,6 @@ import pinned from "../../assets/icons/pinned.svg";
 import pin from "../../assets/icons/pin.svg";
 import remove from "../../assets/icons/delete.svg";
 import archived from "../../assets/icons/archived.svg";
-import { SearchBar } from "../SearchBar/SearchBar";
 import { useData } from "../../contexts";
 import { restoreArchives, deleteArchives } from "../../services";
 
@@ -24,7 +23,6 @@ export const Archives = () => {
 
   return (
     <>
-      <SearchBar />
       <div className="notes-container">
         <h2>Archived</h2>
         {data.archives &&
@@ -37,14 +35,24 @@ export const Archives = () => {
               >
                 <div className="note-header">
                   <h4 className="text-md">{item.title}</h4>
-                  <img src={item.pinned?pinned:pin} className="pin action-icon" alt="pin" />
+                  <img
+                    src={item.pinned ? pinned : pin}
+                    className="pin action-icon"
+                    alt="pin"
+                  />
                 </div>
                 <div className="note-body text-sm text-justify">
                   {item.body}
                 </div>
-                {item.tags && (
-                  <div className="text-left tag margin-t">{item.tags[0]}</div>
-                )}
+                <div className="text-sm notes-tags margin-t">
+                  Tags:{" "}
+                  {item.tags.map((tag) => (
+                    <span className="tag-chip text-sm margin-l">{tag}</span>
+                  ))}
+                </div>
+                <div className="text-sm notes-priority margin-t">
+                  Priority: {item.priority}
+                </div>
                 <div className="note-footer text-sm margin-t margin-b">
                   <div className="date">{item.date}</div>
                   <div className="action-icons margin-r">

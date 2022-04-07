@@ -25,6 +25,8 @@ export const Notes = () => {
   const [editId, setEditId] = useState("");
   const [editData, setEditData] = useState("");
   const [tags, setTags] = useState([]);
+  const [priority, setPriority] = useState("low");
+
   const token = localStorage.getItem("login");
   const navigate = useNavigate();
 
@@ -39,6 +41,7 @@ export const Notes = () => {
       tags: tags,
       pinned: false,
       colorIndex: index,
+      priority: priority,
       date: new Date().toLocaleDateString(),
     };
     setTags([]);
@@ -129,6 +132,9 @@ export const Notes = () => {
                     className="margin-l note-title text-lg"
                   />
                 </h4>
+                <span className="note-close" onClick={() => setNote(false)}>
+                  &times;
+                </span>
               </div>
               <div className="note-body text-sm text-justify">
                 <textarea
@@ -152,6 +158,16 @@ export const Notes = () => {
                     })}
                 </div>
               )}
+              <div className="text-sm notes-priority">
+                Priority:{" "}
+                <select
+                  value={priority}
+                  onChange={(e) => setPriority(e.target.value)}
+                >
+                  <option>low</option>
+                  <option>high</option>
+                </select>
+              </div>
               <div className="note-footer text-sm margin-t margin-b">
                 <div className="date">{new Date().toLocaleDateString()}</div>
                 <div className="action-icons margin-r">
@@ -273,6 +289,15 @@ export const Notes = () => {
                   </div>
                   <div className="note-body text-sm text-justify">
                     {item.body}
+                  </div>
+                  <div className="text-sm notes-tags margin-t">
+                    Tags:{" "}
+                    {item.tags.map((tag) => (
+                      <span className="tag-chip text-sm margin-l">{tag}</span>
+                    ))}
+                  </div>
+                  <div className="text-sm notes-priority margin-t">
+                    Priority: {item.priority}
                   </div>
                   <div className="note-footer text-sm margin-t margin-b">
                     <div className="date">Created on {item.date}</div>
@@ -401,6 +426,15 @@ export const Notes = () => {
                   </div>
                   <div className="note-body text-sm text-justify">
                     {item.body}
+                  </div>
+                  <div className="text-sm notes-tags margin-t">
+                    Tags:{" "}
+                    {item.tags.map((tag) => (
+                      <span className="tag-chip text-sm margin-l">{tag}</span>
+                    ))}
+                  </div>
+                  <div className="text-sm notes-priority margin-t">
+                    Priority: {item.priority}
                   </div>
                   <div className="note-footer text-sm margin-t margin-b">
                     <div className="date">Created on {item.date}</div>

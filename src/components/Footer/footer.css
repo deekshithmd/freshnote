@@ -13,9 +13,9 @@
 }
 
 .footer-text{
-    color: var(--secondary-text-color);
+    color: var(--secondary-white-text-color);
 }
 
 .footer-social-icons i{
-    color: var(--secondary-text-color)
+    color: var(--secondary-white-text-color)
 }

@@ -4,7 +4,6 @@ import pin from "../../assets/icons/pin.svg";
 import archive from "../../assets/icons/archive.svg";
 import restore from "../../assets/icons/restore.svg";
 import deleten from "../../assets/icons/trash.svg";
-import { SearchBar } from "../SearchBar/SearchBar";
 import { useData } from "../../contexts";
 import { addNotes, addArchives } from "../../services";
 
@@ -17,15 +16,8 @@ export const Trash = () => {
     dispatch({ type: "LOAD_NOTES", payload: res.data.notes });
   };
 
-  // const addArchive = async (n, t) => {
-  //   const res = await addArchives({ note: n, noteId: n._id, encodedToken: t });
-  //   dispatch({ type: "DELETE_TRASH", payload: n._id });
-  //   dispatch({ type: "LOAD_ARCHIVES", payload: res.data.archives });
-  // };
-
   return (
     <>
-      <SearchBar />
       <div className="notes-container">
         <h2>Trash</h2>
         {data.trash &&
@@ -47,18 +39,18 @@ export const Trash = () => {
                 <div className="note-body text-sm text-justify">
                   {item.body}
                 </div>
-                {item.tags.length > 0 && (
-                  <div className="text-left tag margin-t">{item.tags[0]}</div>
-                )}
+                <div className="text-sm notes-tags margin-t">
+                  Tags:{" "}
+                  {item.tags.map((tag) => (
+                    <span className="tag-chip text-sm margin-l">{tag}</span>
+                  ))}
+                </div>
+                <div className="text-sm notes-priority margin-t">
+                  Priority: {item.priority}
+                </div>
                 <div className="note-footer text-sm margin-t margin-b">
                   <div className="date">Created on {item.date}</div>
                   <div className="action-icons margin-r">
-                    {/* <img
-                      src={archive}
-                      className="action-icon margin-r"
-                      alt="archive"
-                      onClick={() => addArchive(item, token)}
-                    /> */}
                     <img
                       src={restore}
                       className="action-icon margin-r"

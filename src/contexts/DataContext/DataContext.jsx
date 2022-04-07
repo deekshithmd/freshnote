@@ -17,15 +17,16 @@ const DataProvider = ({ children }) => {
     archives: [],
     pinned: [],
     labels: [
-      { _id: uuid(), tag: "College" },
-      { _id: uuid(), tag: "Reminder" },
-      { _id: uuid(), tag: "Work" },
+      { _id: uuid(), tag: "college" },
+      { _id: uuid(), tag: "reminder" },
+      { _id: uuid(), tag: "work" },
     ],
     trash: [],
     filtered: [],
   });
   const [note, setNote] = useState(false);
   const [notes, setNotes] = useState([]);
+  const [isFiltered, setIsFiltered] = useState(false);
 
   const colors = [
     "#ffbb99",
@@ -57,8 +58,8 @@ const DataProvider = ({ children }) => {
     })();
   }, []);
 
-  const filtereddata = data.filtered.length > 0 ? data.filtered : data.notes;
-  
+  const filtereddata = isFiltered ? data.filtered : data.notes;
+
   return (
     <DataContext.Provider
       value={{
@@ -71,6 +72,7 @@ const DataProvider = ({ children }) => {
         data,
         dispatch,
         filtereddata,
+        setIsFiltered
       }}
     >
       {children}
