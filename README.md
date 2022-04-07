@@ -51,7 +51,7 @@ FreshNote is a note taking application where you can create notes with heading a
       ```
    * Install missing dependencies
       ```
-      nmp install
+      npm install
       ```
    * Run the application
       ```
