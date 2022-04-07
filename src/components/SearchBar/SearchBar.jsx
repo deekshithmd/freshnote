@@ -7,7 +7,7 @@ export const SearchBar = () => {
   const [priority, setPriority] = useState("all");
   const { data, dispatch, setIsFiltered } = useData();
 
-  const getFiltered = (filterv, datav, priorityv) => {
+  const getFiltered = (filterv, priorityv, datav) => {
     setModal(false);
     setIsFiltered(true);
     const filter1 = filterv

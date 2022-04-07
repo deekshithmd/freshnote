@@ -29,13 +29,13 @@ const DataProvider = ({ children }) => {
   const [isFiltered, setIsFiltered] = useState(false);
 
   const colors = [
-    "#ffbb99",
-    "#85e085",
-    "#b3b3ff",
-    "#ffff80",
+    "#ffffb3",
+    "#ffb3ff",
+    "#ccffff",
+    "#b3ecff",
+    "#e6e6e6",
     "#b3ffff",
-    "#ffb3e6",
-    "#e580ff",
+    "#ffc299",
   ];
   const token = localStorage.getItem("login");
 

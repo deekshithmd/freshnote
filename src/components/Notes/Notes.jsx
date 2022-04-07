@@ -159,7 +159,7 @@ export const Notes = () => {
                 </div>
               )}
               <div className="text-sm notes-priority">
-                Priority:{" "}
+                Priority:
                 <select
                   value={priority}
                   onChange={(e) => setPriority(e.target.value)}
