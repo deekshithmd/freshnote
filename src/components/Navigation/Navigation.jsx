@@ -49,7 +49,7 @@ export const Navigation = () => {
             <li className="list-inline-item">
               <button
                 className="btn btn-icon-primary user-signout"
-                onClick={() => LogoutHandler()}
+                onClick={ LogoutHandler}
               >
                 <Link to="/">
                   <i className="fa fa-sign-out fa-2x"></i>
@@ -66,7 +66,7 @@ export const Navigation = () => {
                   ? "fas fa-sun nav-icon"
                   : "fas fa-moon nav-icon"
               }
-              onClick={() => Toggle()}
+              onClick={Toggle}
             ></i>
           </span>
         </li>

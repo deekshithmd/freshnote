@@ -85,7 +85,7 @@ export default function Login() {
             value="Login"
           />
         </form>
-        <button className="btn btn-solid-primary margin" onClick={()=>TestLogin()}>
+        <button className="btn btn-solid-primary margin" onClick={TestLogin}>
           Test User Login
         </button>
         <p className="text-md">
