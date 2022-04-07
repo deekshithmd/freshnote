@@ -1,9 +1,37 @@
 import "./searchbar.css";
 import { useState } from "react";
+import { useData } from "../../contexts";
 export const SearchBar = () => {
   const [modal, setModal] = useState(false);
   const [filter, setFilter] = useState();
-  const [sort, setSort] = useState();
+  const [priority, setPriority] = useState("all");
+  const { data, dispatch, setIsFiltered } = useData();
+
+  const getFiltered = (filterv, priorityv, datav) => {
+    setModal(false);
+    setIsFiltered(true);
+    const filter1 = filterv
+      ? filterv === "All"
+        ? datav
+        : datav.filter((item) =>
+            item.tags.some((i) => (i === filterv ? true : false))
+          )
+      : datav;
+
+    const filter2 = priorityv
+      ? priorityv === "all"
+        ? filter1
+        : filter1.filter((item) => item.priority === priorityv)
+      : filter1;
+
+    dispatch({ type: "FILTER", payload: filter2 });
+  };
+
+  const reset = () => {
+    setModal(false);
+    setIsFiltered(false);
+  };
+
   return (
     <>
       <div className="search-bar">
@@ -18,38 +46,48 @@ export const SearchBar = () => {
         <div className="modal-container">
           <div className="modal">
             <section className="modal-header">
-              <p className="subtitle-2 text-bold">Sort & Filter Notes</p>
-              <i className="fa-solid fa-xmark" onClick={() => setModal(false)}></i>
+              <p className="subtitle-2 text-bold">Filter Notes</p>
+              <i
+                className="fa-solid fa-xmark"
+                onClick={() => setModal(false)}
+              ></i>
             </section>
             <section className="modal-content text-md">
-              <p>Sort By</p>
-              <select value={sort} onChange={(e) => setSort(e.target.value)}>
-                <option value="Newest First">Newest First</option>
-                <option value="Oldest First">Oldest First</option>
-              </select>
               <p>Filter By</p>
+              <p>Labels</p>
               <select
                 value={filter}
                 onChange={(e) => setFilter(e.target.value)}
               >
-                <option>Label1</option>
-                <option>Label2</option>
-                <option>Label3</option>
+                <option value="All">all</option>
+                {data.labels.map((label) => (
+                  <option key={label._id} value={label.tag}>
+                    {label.tag}
+                  </option>
+                ))}
               </select>
-              {filter === "Label1" ? (
-                <div>
-                  <input type="checkbox" />
-                  Label1
-                  <input type="checkbox" />
-                  Label2
-                </div>
-              ) : (
-                ""
-              )}
+              <p>Priority</p>
+              <select
+                value={priority}
+                onChange={(e) => setPriority(e.target.value)}
+              >
+                <option>all</option>
+                <option>low</option>
+                <option>high</option>
+              </select>
             </section>
             <section className="modal-actions">
-              <button className="btn btn-solid-primary margin-l close-modal">
-                Done
+              <button
+                className="btn btn-solid-primary margin-l close-modal"
+                onClick={reset}
+              >
+                Reset
+              </button>
+              <button
+                className="btn btn-solid-primary margin-l close-modal"
+                onClick={() => getFiltered(filter, priority, data.notes)}
+              >
+                Filter
               </button>
             </section>
           </div>

@@ -1,7 +1,7 @@
 .labels {
     display: flex;
     justify-content: flex-start;
-    width: 70rem;
+    width: 100%;
     flex-wrap: wrap;
 }
 
@@ -12,4 +12,5 @@
 .chip {
     height: 3.5rem;
     margin: 1rem;
+    cursor: pointer;
 }

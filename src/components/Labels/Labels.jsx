@@ -2,7 +2,6 @@ import "../Notes/notes.css";
 import "./label.css";
 import pinned from "../../assets/icons/pinned.svg";
 import pin from "../../assets/icons/pin.svg";
-import { SearchBar } from "../SearchBar/SearchBar";
 import { v4 as uuid } from "uuid";
 import { useData } from "../../contexts";
 import { useState } from "react";
@@ -30,7 +29,6 @@ export const Labels = () => {
   };
   return (
     <>
-      <SearchBar />
       <div className="notes-container">
         <div className="add-tag">
           <input
@@ -75,10 +73,23 @@ export const Labels = () => {
               >
                 <div className="note-header">
                   <h4 className="text-md">{item.title}</h4>
-                  <img src={item.pinned?pinned:pin} className="pin action-icon" alt="pin" />
+                  <img
+                    src={item.pinned ? pinned : pin}
+                    className="pin action-icon"
+                    alt="pin"
+                  />
                 </div>
                 <div className="note-body text-sm text-justify">
                   {item.body}
+                </div>
+                <div className="text-sm notes-tags margin-t">
+                  Tags:{" "}
+                  {item.tags.map((tag) => (
+                    <span className="tag-chip text-sm margin-l">{tag}</span>
+                  ))}
+                </div>
+                <div className="text-sm notes-priority margin-t">
+                  Priority: {item.priority}
                 </div>
                 <div className="note-footer text-sm margin-t margin-b">
                   <div className="date">Created on {item.date}</div>

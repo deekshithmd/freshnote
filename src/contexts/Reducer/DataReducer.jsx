@@ -1,11 +1,22 @@
 export const DataReducer = (state, action) => {
   switch (action.type) {
     case "LOAD_NOTES":
+      localStorage.setItem("notes", JSON.stringify(action.payload));
       return { ...state, notes: action.payload };
     case "LOAD_ARCHIVES":
+      localStorage.setItem("archives", JSON.stringify(action.payload));
       return { ...state, archives: action.payload };
-    case "PINNED":
+    case "PINNOTE":
       return { ...state, pinned: [...state.pinned, action.payload] };
+    case "REMOVEPIN":
+      return {
+        ...state,
+        pinned: [
+          ...state.pinned.filter((note) => note._id !== action.payload._id),
+        ],
+      };
+    case "OTHERS":
+      return { ...state, others: [...state.others, action.payload] };
     case "ADD_LABEL":
       return { ...state, labels: [...state.labels, action.payload] };
     case "DELETE_LABEL":
@@ -20,6 +31,8 @@ export const DataReducer = (state, action) => {
         ...state,
         trash: [...state.trash.filter((item) => item._id !== action.payload)],
       };
+    case "FILTER":
+      return { ...state, filtered: action.payload };
     default:
       return state;
   }

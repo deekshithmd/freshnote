@@ -11,13 +11,13 @@ export const HomePage = () => {
             <span className="brand-text">FreshNote</span> Note Keeping
             Application
           </h1>
-          <h3>Do you feel difficulty in keeping record of notes?</h3>
-          <h2>Then we are here for you...</h2>
+          <h3>Do you feel difficulty in keeping record of your notes?</h3>
+          <h2>Then we are here to help you...</h2>
           <Link to="/signup">
             <button className="btn btn-solid-primary">Join Now</button>
           </Link>
           <Link to="/login" className="link-style-none text-md login-link">
-            Already have an Account?
+            Already have an Account? Click here to Login
           </Link>
         </div>
         <div className="col-2">

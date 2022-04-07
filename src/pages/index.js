@@ -5,4 +5,14 @@ import { TrashPage } from "./TrashPage/Trash";
 import { ArchivesPage } from "./ArchivesPage/Archives";
 import Login from "./Authentication/Login";
 import Signup from "./Authentication/Signup";
-export { HomePage, NotesPage, LabelsPage, TrashPage, ArchivesPage,Login,Signup };
+import { ErrorPage } from "./ErrorPage/ErrorPage";
+export {
+  HomePage,
+  NotesPage,
+  LabelsPage,
+  TrashPage,
+  ArchivesPage,
+  Login,
+  Signup,
+  ErrorPage,
+};

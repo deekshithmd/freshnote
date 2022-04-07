@@ -1,6 +1,7 @@
 .notes-sidebar{
     display: flex;
     flex-direction: column;
+    min-height: 57vh;
 }
 
 .inline-item{
@@ -10,6 +11,6 @@
 }
 
 .sidebar-icon{
-    width: 25px;
-    height: 25px;
+    font-size: 2rem;
+    color:var(--primary-color)
 }
