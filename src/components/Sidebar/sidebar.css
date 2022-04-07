@@ -1,6 +1,7 @@
 .notes-sidebar{
     display: flex;
     flex-direction: column;
+    min-height: 57vh;
 }
 
 .inline-item{

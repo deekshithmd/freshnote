@@ -1,6 +1,5 @@
 import React from "react";
 import "./navigation.css";
-import notelogo from "../../assets/icons/note-logo.svg";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts";
 import { useNavigate } from "react-router-dom";
@@ -37,19 +36,21 @@ export const Navigation = () => {
 
         {token && (
           <>
-            <li className="list-inline-item">
-              <div className="avatar avatar-xs">
-                <img
-                  className="img-responsive img-round"
-                  src="https://i.postimg.cc/28Zcgq1j/avatar.png"
-                  alt="Avatar"
-                />
-              </div>
-            </li>
+            <Link to="/error">
+              <li className="list-inline-item">
+                <div className="avatar avatar-xs">
+                  <img
+                    className="img-responsive img-round"
+                    src="https://i.postimg.cc/28Zcgq1j/avatar.png"
+                    alt="Avatar"
+                  />
+                </div>
+              </li>
+            </Link>
             <li className="list-inline-item">
               <button
                 className="btn btn-icon-primary user-signout"
-                onClick={ LogoutHandler}
+                onClick={LogoutHandler}
               >
                 <Link to="/">
                   <i className="fa fa-sign-out fa-2x"></i>
