@@ -61,7 +61,7 @@ textarea {
     width: 100%;
 }
 
-.notes-body {
+.note-body {
     width: 100%;
     color: var(--black-text-color);
 }
@@ -101,12 +101,14 @@ textarea {
     display: flex;
     justify-content: start;
     align-items: center;
+    color: var(--black-text-color);
 }
 
 .notes-tags {
     display: flex;
     justify-content: start;
     align-items: center;
+    color: var(--black-text-color);
 }
 
 .tag-chip {

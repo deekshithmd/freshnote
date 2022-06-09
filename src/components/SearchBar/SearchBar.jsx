@@ -34,9 +34,8 @@ export const SearchBar = () => {
 
   return (
     <>
-      <div className="search-bar">
-        <i className="fa-solid fa-magnifying-glass searchbar-icon margin-r"></i>
-        <input type="search" placeholder="Search here..." />
+      <div className="filter-bar">
+        <p className="margin-r">Filters</p>
         <i
           className="fa-solid fa-filter searchbar-icon margin-r"
           onClick={() => setModal(true)}

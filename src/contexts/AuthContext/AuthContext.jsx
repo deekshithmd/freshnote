@@ -7,22 +7,20 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [token, setToken] = useState(false);
-
+  const [user, setUser] = useState("");
   useEffect(() => {
     (async () => {
       if (localStorage.getItem("login")) {
         setToken(true);
-      } 
-      else if (localStorage.getItem("token")) {
-        navigate("/login");
+        setUser(JSON.parse(localStorage.getItem("user")));
       } else {
-        navigate("/signup");
+        navigate("/");
       }
     })();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ token, setToken }}>
+    <AuthContext.Provider value={{ token, setToken, user, setUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -15,14 +15,12 @@ export default function Signup() {
     try {
       event.preventDefault();
       const { firstname, lastname, email, pass } = event.target.elements;
-      console.log(firstname.value, lastname.value, email.value, pass.value);
       const response = await axios.post(`/api/auth/signup`, {
         firstname: firstname.value,
         lastname: lastname.value,
         email: email.value,
         password: pass.value,
       });
-      console.log(response.data);
       if (response.data.encodedToken) {
         localStorage.setItem(
           "token",

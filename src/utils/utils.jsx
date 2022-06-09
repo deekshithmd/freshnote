@@ -1,7 +1,7 @@
 export const getCredentials = (email, password) => {
-  return { email: "adarshbalika@gmail.com", password: "adarshBalika123" };
+  return { email: email.value, password: password.value };
 };
 
 export const getTestData = () => {
-  return { email: "adarshbalika@gmail.com", password: "adarshBalika123" };
+  return { email: "rammohan@gmail.com", password: "rammohan123" };
 };

@@ -6,6 +6,7 @@ import { ArchivesPage } from "./ArchivesPage/Archives";
 import Login from "./Authentication/Login";
 import Signup from "./Authentication/Signup";
 import { ErrorPage } from "./ErrorPage/ErrorPage";
+import { ProfilePage } from "./ProfilePage/ProfilePage";
 export {
   HomePage,
   NotesPage,
@@ -15,4 +16,5 @@ export {
   Login,
   Signup,
   ErrorPage,
+  ProfilePage
 };

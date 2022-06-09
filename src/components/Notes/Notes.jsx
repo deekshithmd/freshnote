@@ -290,12 +290,14 @@ export const Notes = () => {
                   <div className="note-body text-sm text-justify">
                     {item.body}
                   </div>
-                  <div className="text-sm notes-tags margin-t">
-                    Tags:{" "}
-                    {item.tags.map((tag) => (
-                      <span className="tag-chip text-sm margin-l">{tag}</span>
-                    ))}
-                  </div>
+                  {item.tags.length > 0 && (
+                    <div className="text-sm notes-tags margin-t">
+                      Tags:{" "}
+                      {item.tags.map((tag) => (
+                        <span className="tag-chip text-sm margin-l">{tag}</span>
+                      ))}
+                    </div>
+                  )}
                   <div className="text-sm notes-priority margin-t">
                     Priority: {item.priority}
                   </div>
@@ -427,12 +429,14 @@ export const Notes = () => {
                   <div className="note-body text-sm text-justify">
                     {item.body}
                   </div>
-                  <div className="text-sm notes-tags margin-t">
-                    Tags:{" "}
-                    {item.tags.map((tag) => (
-                      <span className="tag-chip text-sm margin-l">{tag}</span>
-                    ))}
-                  </div>
+                  {item.tags.length > 0 && (
+                    <div className="text-sm notes-tags margin-t">
+                      Tags:{" "}
+                      {item.tags.map((tag) => (
+                        <span className="tag-chip text-sm margin-l">{tag}</span>
+                      ))}
+                    </div>
+                  )}
                   <div className="text-sm notes-priority margin-t">
                     Priority: {item.priority}
                   </div>

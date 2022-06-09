@@ -6,6 +6,7 @@ import {
   ArchivesPage,
   TrashPage,
   ErrorPage,
+  ProfilePage
 } from "./pages";
 import { Route, Routes } from "react-router-dom";
 import { Navigation, Footer } from "./components";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/labels" element={<LabelsPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />

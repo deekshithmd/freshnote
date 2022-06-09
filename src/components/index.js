@@ -6,6 +6,7 @@ import { Archives } from "./Archives/Archives";
 import { Labels } from "./Labels/Labels";
 import { SearchBar } from "./SearchBar/SearchBar";
 import { Footer } from "./Footer/Footer";
+import {Profile} from "./Profile/Profile"
 export {
   Navigation,
   Siderbar,
@@ -15,4 +16,5 @@ export {
   Labels,
   SearchBar,
   Footer,
+  Profile
 };

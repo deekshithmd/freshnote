@@ -1,5 +1,5 @@
 import "./authentication.css";
-import { getCredentials,getTestData } from "../../utils";
+import { getCredentials, getTestData } from "../../utils";
 import axios from "axios";
 import { useAuth } from "../../contexts";
 import { useNavigate } from "react-router-dom";
@@ -7,32 +7,29 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export default function Login() {
-  const { setToken } = useAuth();
+  const { setToken, setUser } = useAuth();
 
   const navigate = useNavigate();
   const [error, setError] = useState(false);
 
-  const testLogin=async()=>{
-    try{
-      const response = await axios.post(
-        "/api/auth/login",
-        getTestData()
-      );
-      console.log(response.data);
+  const testLogin = async () => {
+    try {
+      const response = await axios.post("/api/auth/login", getTestData());
       if (response.data.encodedToken) {
         localStorage.setItem(
           "login",
           JSON.stringify(response.data.encodedToken)
         );
+        localStorage.setItem("user", JSON.stringify(response.data.foundUser));
+        setUser(response.data.foundUser);
         setToken(true);
         navigate("/notes");
       }
-    }
-    catch(e){
-      setError(true)
+    } catch (e) {
+      setError(true);
       navigate("/login");
     }
-  }
+  };
 
   const handleLogin = async (event) => {
     try {
@@ -42,7 +39,6 @@ export default function Login() {
         "/api/auth/login",
         getCredentials(email, password)
       );
-      console.log(response);
       if (response.data.encodedToken) {
         localStorage.setItem(
           "login",

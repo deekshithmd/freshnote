@@ -11,9 +11,7 @@ export const Navigation = () => {
   const navigate = useNavigate();
 
   const LogoutHandler = () => {
-    localStorage.removeItem("login");
-    localStorage.removeItem("notes");
-    localStorage.removeItem("archives");
+    localStorage.clear();
     setToken(false);
     navigate("/");
   };
@@ -21,7 +19,7 @@ export const Navigation = () => {
   return (
     <nav className="navigation-bar">
       <section className="brand logo">
-        <Link to={token ? "/notes" : "/"} className="brand">
+        <Link to="/" className="brand">
           <span className="brand-text">FreshNote</span>
         </Link>
       </section>
@@ -36,17 +34,11 @@ export const Navigation = () => {
 
         {token && (
           <>
-            <Link to="/error">
-              <li className="list-inline-item">
-                <div className="avatar avatar-xs">
-                  <img
-                    className="img-responsive img-round"
-                    src="https://i.postimg.cc/28Zcgq1j/avatar.png"
-                    alt="Avatar"
-                  />
-                </div>
-              </li>
-            </Link>
+            <li className="list-inline-item">
+              <Link to="/notes" className="btn btn-solid-primary link-btn">
+                Notes
+              </Link>
+            </li>
             <li className="list-inline-item">
               <button
                 className="btn btn-icon-primary user-signout"

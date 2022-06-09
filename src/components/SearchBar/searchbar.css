@@ -1,9 +1,10 @@
-.search-bar {
-    border: 1px solid black;
-    width: 30rem;
+.filter-bar {
+    border: 1px solid var(--primary-color);
+    border-radius: 40px;
+    width: fit-content;
     padding: 10px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     margin: auto;
 }
 
