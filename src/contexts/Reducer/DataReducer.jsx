@@ -15,8 +15,6 @@ export const DataReducer = (state, action) => {
           ...state.pinned.filter((note) => note._id !== action.payload._id),
         ],
       };
-    case "OTHERS":
-      return { ...state, others: [...state.others, action.payload] };
     case "ADD_LABEL":
       return { ...state, labels: [...state.labels, action.payload] };
     case "DELETE_LABEL":
