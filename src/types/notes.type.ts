@@ -1,19 +1,3 @@
-export type tagType = {
-  _id: any;
-  tag: string;
-};
-
-export type notesType = {
-  _id?: any;
-  tags?: tagType[];
-  title: string;
-  body: string;
-  pinned?: boolean;
-  colorIndex: number;
-  priority?: string;
-  date: Date | string;
-};
-
 export const notesInitialState = {
   _id: "",
   tags: [{ _id: "", tag: "" }],
@@ -28,4 +12,20 @@ export const notesInitialState = {
 export const tagInitialState = {
   _id: "",
   tag: "",
+};
+
+export type tagType = {
+  _id: any;
+  tag: string;
+};
+
+export type notesType = {
+  _id?: any;
+  tags?: tagType[];
+  title: string;
+  body: string;
+  pinned?: boolean;
+  colorIndex: number;
+  priority?: string;
+  date: Date | string;
 };

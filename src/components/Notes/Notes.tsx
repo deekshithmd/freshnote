@@ -21,10 +21,14 @@ import { notesType, notesInitialState, tagType } from "types/notes.type";
 
 export const Notes = () => {
   const { note, setNote, colors, dispatch, data, filtereddata } = useData();
-  const [edit, setEdit] = useState(false);
-  const [label, setLabel] = useState(false);
-  const [index, setIndex] = useState(0);
-  const [editId, setEditId] = useState("");
+  const [edit, setEdit] = useState<boolean>(false);
+  const [label, setLabel] = useState<boolean>(false);
+  const [index, setIndex] = useState<number>(0);
+  const [editId, setEditId] = useState<string>("");
+  const [tags, setTags] = useState<tagType[]>([]);
+  const [priority, setPriority] = useState<string>("low");
+  const token = localStorage.getItem("login") || "";
+  const navigate = useNavigate();
   const [editData, setEditData] = useState<notesType>({
     _id: "",
     tags: [{ _id: "", tag: "" }],
@@ -35,10 +39,6 @@ export const Notes = () => {
     priority: "",
     date: new Date(),
   });
-  const [tags, setTags] = useState<tagType[]>([]);
-  const [priority, setPriority] = useState("low");
-  const token = localStorage.getItem("login") || "";
-  const navigate = useNavigate();
 
   const addNote = async (e: any) => {
     setNote(false);

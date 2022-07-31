@@ -8,7 +8,7 @@ export default function Signup() {
 
   const [email, setEmail] = useState<boolean>();
   const [password, setPassword] = useState<boolean>();
-  const [passwordValue, setPasswordvalue] = useState();
+  const [passwordValue, setPasswordvalue] = useState<string>();
   const [confirm, setConfirm] = useState<boolean>();
 
   const handleSignup = async (event: any) => {

@@ -8,9 +8,8 @@ import { useState } from "react";
 
 export default function Login() {
   const { setToken, setUser } = useAuth();
-
   const navigate = useNavigate();
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<boolean>(false);
 
   const testLogin = async () => {
     try {

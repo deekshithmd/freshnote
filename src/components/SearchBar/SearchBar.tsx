@@ -4,7 +4,7 @@ import { useData } from "../../contexts";
 import { notesType } from "types/notes.type";
 export const SearchBar = () => {
   const [modal, setModal] = useState<boolean>(false);
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState<string>("");
   const [priority, setPriority] = useState<string>("all");
   const { data, dispatch, setIsFiltered } = useData();
 
