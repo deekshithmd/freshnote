@@ -31,7 +31,7 @@ export default function Login() {
     }
   };
 
-  const handleLogin = async (event) => {
+  const handleLogin = async (event:any) => {
     try {
       event.preventDefault();
       const { email, password } = event.target.elements;

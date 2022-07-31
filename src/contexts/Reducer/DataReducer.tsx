@@ -1,4 +1,7 @@
-export const DataReducer = (state, action) => {
+import { reducerType } from "./Datareducer.type";
+import { initialStateType } from "contexts/DataContext/DataContext.type";
+
+export const DataReducer = (state: initialStateType, action: reducerType) => {
   switch (action.type) {
     case "LOAD_NOTES":
       localStorage.setItem("notes", JSON.stringify(action.payload));
@@ -12,7 +15,7 @@ export const DataReducer = (state, action) => {
       return {
         ...state,
         pinned: [
-          ...state.pinned.filter((note) => note._id !== action.payload._id),
+          ...state.pinned.filter((note) => note._id !== action?.payload?._id),
         ],
       };
     case "OTHERS":

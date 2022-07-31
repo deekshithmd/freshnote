@@ -1,20 +1,25 @@
 import "./searchbar.css";
 import { useState } from "react";
 import { useData } from "../../contexts";
+import { notesType } from "types/notes.type";
 export const SearchBar = () => {
-  const [modal, setModal] = useState(false);
-  const [filter, setFilter] = useState();
-  const [priority, setPriority] = useState("all");
+  const [modal, setModal] = useState<boolean>(false);
+  const [filter, setFilter] = useState("");
+  const [priority, setPriority] = useState<string>("all");
   const { data, dispatch, setIsFiltered } = useData();
 
-  const getFiltered = (filterv, priorityv, datav) => {
+  const getFiltered = (
+    filterv: string,
+    priorityv: string,
+    datav: notesType[]
+  ) => {
     setModal(false);
     setIsFiltered(true);
     const filter1 = filterv
       ? filterv === "All"
         ? datav
         : datav.filter((item) =>
-            item.tags.some((i) => (i === filterv ? true : false))
+            item?.tags?.some((i) => (i.tag === filterv ? true : false))
           )
       : datav;
 
@@ -56,19 +61,19 @@ export const SearchBar = () => {
               <p>Labels</p>
               <select
                 value={filter}
-                onChange={(e) => setFilter(e.target.value)}
+                onChange={(e: any) => setFilter(e?.target?.value)}
               >
                 <option value="All">all</option>
-                {data.labels.map((label) => (
-                  <option key={label._id} value={label.tag}>
-                    {label.tag}
+                {data?.labels?.map((label) => (
+                  <option key={label?._id} value={label?.tag}>
+                    {label?.tag}
                   </option>
                 ))}
               </select>
               <p>Priority</p>
               <select
                 value={priority}
-                onChange={(e) => setPriority(e.target.value)}
+                onChange={(e: any) => setPriority(e?.target?.value)}
               >
                 <option>all</option>
                 <option>low</option>

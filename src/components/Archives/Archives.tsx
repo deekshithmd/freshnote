@@ -1,27 +1,33 @@
 import "../Notes/notes.css";
 import pinned from "../../assets/icons/pinned.svg";
 import pin from "../../assets/icons/pin.svg";
-import archive from "../../assets/icons/archive.svg";
-import restore from "../../assets/icons/restore.svg";
-import deleten from "../../assets/icons/trash.svg";
+import remove from "../../assets/icons/delete.svg";
+import archived from "../../assets/icons/archived.svg";
 import { useData } from "../../contexts";
-import { addNotes, addArchives } from "../../services";
+import { restoreArchives, deleteArchives } from "../../services";
+import { notesType } from "types/notes.type";
 
-export const Trash = () => {
+export const Archives = () => {
   const { token, colors, data, dispatch } = useData();
 
-  const restoreNote = async (notes, token) => {
-    const res = await addNotes({ note: notes, encodedToken: token });
-    dispatch({ type: "DELETE_TRASH", payload: notes._id });
+  const unArchive = async (id: any, t: string) => {
+    const res = await restoreArchives({ noteId: id, encodedToken: t });
     dispatch({ type: "LOAD_NOTES", payload: res.data.notes });
+    dispatch({ type: "LOAD_ARCHIVES", payload: res.data.archives });
+  };
+
+  const deleteArchive = async (item: notesType, t: string) => {
+    dispatch({ type: "ADD_TRASH", payload: item });
+    const res = await deleteArchives({ noteId: item._id, encodedToken: t });
+    dispatch({ type: "LOAD_ARCHIVES", payload: res.data.archives });
   };
 
   return (
     <>
       <div className="notes-container">
-        <h2>Trash</h2>
-        {data.trash &&
-          data.trash.map((item) => {
+        <h2>Archived</h2>
+        {data.archives &&
+          data.archives.map((item) => {
             return (
               <div
                 className="note margin-t margin-b"
@@ -41,29 +47,29 @@ export const Trash = () => {
                 </div>
                 <div className="text-sm notes-tags margin-t">
                   Tags:{" "}
-                  {item.tags.map((tag) => (
-                    <span className="tag-chip text-sm margin-l">{tag}</span>
+                  {item?.tags?.map((tag) => (
+                    <span className="tag-chip text-sm margin-l">
+                      {tag?.tag}
+                    </span>
                   ))}
                 </div>
                 <div className="text-sm notes-priority margin-t">
                   Priority: {item.priority}
                 </div>
                 <div className="note-footer text-sm margin-t margin-b">
-                  <div className="date">Created on {item.date}</div>
+                  <div className="date">{item?.date.toString()}</div>
                   <div className="action-icons margin-r">
                     <img
-                      src={restore}
+                      src={archived}
                       className="action-icon margin-r"
-                      alt="delete"
-                      onClick={() => restoreNote(item, token)}
+                      alt="archive"
+                      onClick={() => unArchive(item._id, token)}
                     />
                     <img
-                      src={deleten}
+                      src={remove}
                       className="action-icon"
                       alt="delete"
-                      onClick={() =>
-                        dispatch({ type: "DELETE_TRASH", payload: item._id })
-                      }
+                      onClick={() => deleteArchive(item, token)}
                     />
                   </div>
                 </div>

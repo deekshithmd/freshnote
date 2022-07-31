@@ -6,12 +6,12 @@ import { useState } from "react";
 export default function Signup() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState<boolean>();
+  const [password, setPassword] = useState<boolean>();
   const [passwordValue, setPasswordvalue] = useState();
-  const [confirm, setConfirm] = useState();
+  const [confirm, setConfirm] = useState<boolean>();
 
-  const handleSignup = async (event) => {
+  const handleSignup = async (event: any) => {
     try {
       event.preventDefault();
       const { firstname, lastname, email, pass } = event.target.elements;
@@ -34,20 +34,20 @@ export default function Signup() {
     }
   };
 
-  function checkEmail(e) {
+  function checkEmail(e: any) {
     let regEmail =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     regEmail.test(e.target.value) ? setEmail(true) : setEmail(false);
   }
 
-  function checkPassword(e) {
+  function checkPassword(e: any) {
     const strongRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
     strongRegex.test(e.target.value) ? setPassword(true) : setPassword(false);
     setPasswordvalue(e.target.value);
   }
 
-  function confirmPassword(e) {
+  function confirmPassword(e: any) {
     e.target.value === passwordValue ? setConfirm(true) : setConfirm(false);
   }
 
