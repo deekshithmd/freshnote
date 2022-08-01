@@ -37,7 +37,7 @@ export const Labels = () => {
             type="text"
             value={tag}
             placeholder="Enter your tag"
-            onChange={(e) => setTag(e.target.value)}
+            onChange={(e: any) => setTag(e?.target?.value)}
           />
           <button className="btn btn-solid-primary" onClick={() => addTag()}>
             Add tag
@@ -54,7 +54,7 @@ export const Labels = () => {
                     </span>
                     <span
                       className="chip-close text-bold"
-                      onClick={() => deleteTag(label._id)}
+                      onClick={() => deleteTag(label?._id)}
                     >
                       &times;
                     </span>
@@ -63,19 +63,19 @@ export const Labels = () => {
               );
             })}
         </div>
-        <h2>{label.tag}</h2>
-        {data.notes.map((item) => {
-          if (item?.tags?.some((t) => t.tag === label.tag)) {
+        <h2>{label?.tag}</h2>
+        {data?.notes?.map((item) => {
+          if (item?.tags?.some((t) => t?.tag === label?.tag)) {
             return (
               <div
                 className="note margin-t margin-b"
-                key={item._id}
+                key={item?._id}
                 style={{ backgroundColor: colors[item?.colorIndex] }}
               >
                 <div className="note-header">
-                  <h4 className="text-md">{item.title}</h4>
+                  <h4 className="text-md">{item?.title}</h4>
                   <img
-                    src={item.pinned ? pinned : pin}
+                    src={item?.pinned ? pinned : pin}
                     className="pin action-icon"
                     alt="pin"
                   />
@@ -85,17 +85,19 @@ export const Labels = () => {
                 </div>
                 <div className="text-sm notes-tags margin-t">
                   Tags:{" "}
-                  {item.tags.map((tag) => (
+                  {item?.tags?.map((tag) => (
                     <span className="tag-chip text-sm margin-l">
                       {tag?.tag}
                     </span>
                   ))}
                 </div>
                 <div className="text-sm notes-priority margin-t">
-                  Priority: {item.priority}
+                  Priority: {item?.priority}
                 </div>
                 <div className="note-footer text-sm margin-t margin-b">
-                  <div className="date">Created on {item?.date.toString()}</div>
+                  <div className="date">
+                    Created on {item?.date?.toString()}
+                  </div>
                 </div>
               </div>
             );

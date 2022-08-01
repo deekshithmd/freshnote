@@ -1,19 +1,19 @@
 import axios from "axios";
 import { notesType } from "types/notes.type";
 
-type serviceType = {
+type serviceParameterType = {
   note?: notesType;
   notesId?: any;
   noteId?: any;
   encodedToken: string;
 };
 
-export const getNotes = async ({ encodedToken }: serviceType) =>
+export const getNotes = async ({ encodedToken }: serviceParameterType) =>
   await axios.get(`/api/notes`, {
     headers: { authorization: encodedToken },
   });
 
-export const addNotes = async ({ note, encodedToken }: serviceType) =>
+export const addNotes = async ({ note, encodedToken }: serviceParameterType) =>
   axios.post(
     `/api/notes`,
     { note },
@@ -28,7 +28,7 @@ export const updateNotes = async ({
   notesId,
   note,
   encodedToken,
-}: serviceType) =>
+}: serviceParameterType) =>
   await axios.post(
     `/api/notes/${notesId}`,
     { note },
@@ -39,14 +39,17 @@ export const updateNotes = async ({
     }
   );
 
-export const deleteNotes = async ({ notesId, encodedToken }: serviceType) =>
+export const deleteNotes = async ({
+  notesId,
+  encodedToken,
+}: serviceParameterType) =>
   await axios.delete(`/api/notes/${notesId}`, {
     headers: {
       authorization: encodedToken,
     },
   });
 
-export const getArchives = async ({ encodedToken }: serviceType) =>
+export const getArchives = async ({ encodedToken }: serviceParameterType) =>
   await axios.get(`/api/archives`, {
     headers: {
       authorization: encodedToken,
@@ -57,7 +60,7 @@ export const addArchives = async ({
   note,
   noteId,
   encodedToken,
-}: serviceType) =>
+}: serviceParameterType) =>
   await axios.post(
     `/api/notes/archives/${noteId}`,
     { note },
@@ -68,7 +71,10 @@ export const addArchives = async ({
     }
   );
 
-export const restoreArchives = async ({ noteId, encodedToken }: serviceType) =>
+export const restoreArchives = async ({
+  noteId,
+  encodedToken,
+}: serviceParameterType) =>
   await axios.post(
     `/api/archives/restore/${noteId}`,
     {},
@@ -79,7 +85,10 @@ export const restoreArchives = async ({ noteId, encodedToken }: serviceType) =>
     }
   );
 
-export const deleteArchives = async ({ noteId, encodedToken }: serviceType) =>
+export const deleteArchives = async ({
+  noteId,
+  encodedToken,
+}: serviceParameterType) =>
   await axios.delete(`/api/archives/delete/${noteId}`, {
     headers: {
       authorization: encodedToken,

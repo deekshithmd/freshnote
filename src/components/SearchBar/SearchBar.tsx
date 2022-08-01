@@ -18,15 +18,15 @@ export const SearchBar = () => {
     const filter1 = filterv
       ? filterv === "All"
         ? datav
-        : datav.filter((item) =>
-            item?.tags?.some((i) => (i.tag === filterv ? true : false))
+        : datav?.filter((item) =>
+            item?.tags?.some((i) => (i?.tag === filterv ? true : false))
           )
       : datav;
 
     const filter2 = priorityv
       ? priorityv === "all"
         ? filter1
-        : filter1.filter((item) => item.priority === priorityv)
+        : filter1?.filter((item) => item?.priority === priorityv)
       : filter1;
 
     dispatch({ type: "FILTER", payload: filter2 });

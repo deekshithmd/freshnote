@@ -1,11 +1,10 @@
 import "../Notes/notes.css";
 import pinned from "../../assets/icons/pinned.svg";
 import pin from "../../assets/icons/pin.svg";
-import archive from "../../assets/icons/archive.svg";
 import restore from "../../assets/icons/restore.svg";
 import deleten from "../../assets/icons/trash.svg";
 import { useData } from "../../contexts";
-import { addNotes, addArchives } from "../../services";
+import { addNotes } from "../../services";
 import { notesType } from "types/notes.type";
 
 export const Trash = () => {
@@ -21,24 +20,24 @@ export const Trash = () => {
     <>
       <div className="notes-container">
         <h2>Trash</h2>
-        {data.trash &&
-          data.trash.map((item) => {
+        {data?.trash &&
+          data?.trash?.map((item) => {
             return (
               <div
                 className="note margin-t margin-b"
-                key={item._id}
-                style={{ backgroundColor: colors[item.colorIndex] }}
+                key={item?._id}
+                style={{ backgroundColor: colors[item?.colorIndex] }}
               >
                 <div className="note-header">
-                  <h4 className="text-md">{item.title}</h4>
+                  <h4 className="text-md">{item?.title}</h4>
                   <img
-                    src={item.pinned ? pinned : pin}
+                    src={item?.pinned ? pinned : pin}
                     className="pin action-icon"
                     alt="pin"
                   />
                 </div>
                 <div className="note-body text-sm text-justify">
-                  {item.body}
+                  {item?.body}
                 </div>
                 <div className="text-sm notes-tags margin-t">
                   Tags:{" "}
@@ -49,10 +48,12 @@ export const Trash = () => {
                   ))}
                 </div>
                 <div className="text-sm notes-priority margin-t">
-                  Priority: {item.priority}
+                  Priority: {item?.priority}
                 </div>
                 <div className="note-footer text-sm margin-t margin-b">
-                  <div className="date">Created on {item.date.toString()}</div>
+                  <div className="date">
+                    Created on {item?.date?.toString()}
+                  </div>
                   <div className="action-icons margin-r">
                     <img
                       src={restore}
@@ -65,7 +66,7 @@ export const Trash = () => {
                       className="action-icon"
                       alt="delete"
                       onClick={() =>
-                        dispatch({ type: "DELETE_TRASH", payload: item._id })
+                        dispatch({ type: "DELETE_TRASH", payload: item?._id })
                       }
                     />
                   </div>

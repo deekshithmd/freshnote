@@ -8,17 +8,17 @@ import {
 
 type themeContextType = {
   theme: string;
-  Toggle: () => void;
+  toggleTheme: () => void;
 };
 
 const ThemeContext = createContext<themeContextType>({
   theme: "light",
-  Toggle: () => null,
+  toggleTheme: () => null,
 });
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState("light");
-  const Toggle = () => {
+  const toggleTheme = () => {
     if (theme === "dark") {
       setTheme("light");
       document.body.classList.remove("dark-theme");
@@ -44,7 +44,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
     })();
   }, []);
   return (
-    <ThemeContext.Provider value={{ theme, Toggle }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

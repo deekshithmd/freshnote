@@ -1,5 +1,4 @@
 import "./sidebar.css";
-import React from "react";
 import { Link } from "react-router-dom";
 import { useData } from "../../contexts";
 import { useNavigate } from "react-router-dom";

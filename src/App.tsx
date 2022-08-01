@@ -6,7 +6,7 @@ import {
   ArchivesPage,
   TrashPage,
   ErrorPage,
-  ProfilePage
+  ProfilePage,
 } from "./pages";
 import { Route, Routes } from "react-router-dom";
 import { Navigation, Footer } from "./components";
