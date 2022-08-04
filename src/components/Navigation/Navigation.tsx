@@ -1,4 +1,3 @@
-import React from "react";
 import "./navigation.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts";
@@ -7,7 +6,7 @@ import { useTheme } from "../../contexts";
 
 export const Navigation = () => {
   const { token, setToken } = useAuth();
-  const { theme, Toggle } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const LogoutHandler = () => {
@@ -59,7 +58,7 @@ export const Navigation = () => {
                   ? "fas fa-sun nav-icon"
                   : "fas fa-moon nav-icon"
               }
-              onClick={Toggle}
+              onClick={toggleTheme}
             ></i>
           </span>
         </li>

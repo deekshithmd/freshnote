@@ -10,27 +10,37 @@ import paint from "../../assets/icons/paint-board.svg";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { useData } from "../../contexts";
 import { useState } from "react";
+import { v4 as uuid } from "uuid";
 import {
   addArchives,
   addNotes,
   deleteNotes,
   updateNotes,
 } from "../../services";
+import { notesType, notesInitialState, tagType } from "types/notes.type";
 
 export const Notes = () => {
   const { note, setNote, colors, dispatch, data, filtereddata } = useData();
-  const [edit, setEdit] = useState(false);
-  const [label, setLabel] = useState(false);
-  const [index, setIndex] = useState(0);
-  const [editId, setEditId] = useState("");
-  const [editData, setEditData] = useState("");
-  const [tags, setTags] = useState([]);
-  const [priority, setPriority] = useState("low");
-
-  const token = localStorage.getItem("login");
+  const [edit, setEdit] = useState<boolean>(false);
+  const [label, setLabel] = useState<boolean>(false);
+  const [index, setIndex] = useState<number>(0);
+  const [editId, setEditId] = useState<string>("");
+  const [tags, setTags] = useState<tagType[]>([]);
+  const [priority, setPriority] = useState<string>("low");
+  const token = localStorage.getItem("login") || "";
   const navigate = useNavigate();
+  const [editData, setEditData] = useState<notesType>({
+    _id: "",
+    tags: [{ _id: "", tag: "" }],
+    title: "",
+    body: "",
+    pinned: false,
+    colorIndex: 0,
+    priority: "",
+    date: new Date(),
+  });
 
-  const addNote = async (e) => {
+  const addNote = async (e: any) => {
     setNote(false);
     setLabel(false);
     e.preventDefault();
@@ -45,32 +55,35 @@ export const Notes = () => {
       date: new Date().toLocaleDateString(),
     };
     setTags([]);
-    const res = await addNotes({ note: notes, encodedToken: token });
+    const res = await addNotes({
+      note: notes,
+      encodedToken: token,
+    });
     dispatch({ type: "LOAD_NOTES", payload: res.data.notes });
   };
 
-  const deleteNote = async (item, t) => {
+  const deleteNote = async (item: notesType, t: string) => {
     dispatch({ type: "ADD_TRASH", payload: item });
     const res = await deleteNotes({ notesId: item._id, encodedToken: t });
     dispatch({ type: "LOAD_NOTES", payload: res.data.notes });
   };
 
-  const addArchive = async (n, t) => {
+  const addArchive = async (n: notesType, t: string) => {
     const res = await addArchives({ note: n, noteId: n._id, encodedToken: t });
     dispatch({ type: "LOAD_NOTES", payload: res.data.notes });
     dispatch({ type: "LOAD_ARCHIVES", payload: res.data.archives });
   };
 
-  const editClick = (item) => {
+  const editClick = (item: notesType) => {
     setEdit(true);
     setEditId(item._id);
     setEditData(item);
   };
 
-  const updateNote = async (e) => {
+  const updateNote = async (e: any) => {
     setEdit(false);
     setEditId("");
-    setEditData("");
+    setEditData(notesInitialState);
     setLabel(false);
     e.preventDefault();
     const { notetitle, notebody, notelabel } = e.target.elements;
@@ -78,7 +91,7 @@ export const Notes = () => {
       title: notetitle.value,
       body: notebody.value,
       tags: [notelabel ? notelabel.value : ""],
-      colorIndex: editData.colorIndex,
+      colorIndex: editData?.colorIndex,
       date: new Date().toLocaleDateString(),
     };
     const res = await updateNotes({
@@ -89,7 +102,7 @@ export const Notes = () => {
     dispatch({ type: "LOAD_NOTES", payload: res.data.notes });
   };
 
-  const pinnedNote = async (item) => {
+  const pinnedNote = async (item: notesType) => {
     const notes = {
       ...item,
       pinned: item.pinned === true ? false : true,
@@ -105,9 +118,8 @@ export const Notes = () => {
     dispatch({ type: "LOAD_NOTES", payload: res.data.notes });
   };
 
-  const getLabel = (e) => {
-    const l = tags.concat(e.target.innerText);
-    setTags(l);
+  const getLabel = (e: any) => {
+    setTags((tags) => [...tags, { _id: uuid(), tag: e.target.innerText }]);
   };
 
   return (
@@ -146,8 +158,8 @@ export const Notes = () => {
               </div>
               {label && (
                 <div className="label-chips">
-                  {data.labels &&
-                    data.labels.map((label) => {
+                  {data?.labels &&
+                    data?.labels?.map((label) => {
                       return (
                         <span key={label._id}>
                           <span className="chip text-chip" onClick={getLabel}>
@@ -195,16 +207,16 @@ export const Notes = () => {
             </form>
           </>
         )}
-        {data.pinned.length > 0 && <h2>Pinned Notes</h2>}
+        {data?.pinned?.length > 0 && <h2>Pinned Notes</h2>}
         {filtereddata &&
-          filtereddata.map((item) => {
-            return editId === item._id ? (
-              edit && item.pinned && (
+          filtereddata?.map((item) => {
+            return editId === item?._id ? (
+              edit && item?.pinned && (
                 <form
                   onSubmit={updateNote}
                   autoComplete="off"
                   className="note margin-t margin-b"
-                  style={{ backgroundColor: colors[editData.colorIndex] }}
+                  style={{ backgroundColor: colors[editData?.colorIndex] }}
                 >
                   <div className="note-header">
                     <h4 className="text-md">
@@ -224,7 +236,7 @@ export const Notes = () => {
                       value={editData.body}
                       className="notes-body"
                       name="notebody"
-                      style={{ backgroundColor: colors[editData.colorIndex] }}
+                      style={{ backgroundColor: colors[editData?.colorIndex] }}
                       onChange={(e) =>
                         setEditData({ ...editData, body: e.target.value })
                       }
@@ -235,10 +247,13 @@ export const Notes = () => {
                     <input
                       type="text"
                       name="notelabel"
-                      value={editData.tags[0]}
+                      // value={editData?.tags[0]?.tag}
                       placeholder="Enter tag here..."
                       onChange={(e) =>
-                        setEditData({ ...editData, tags: [e.target.value] })
+                        setEditData({
+                          ...editData,
+                          tags: [{ _id: uuid(), tag: e.target.value }],
+                        })
                       }
                     />
                   )}
@@ -270,15 +285,15 @@ export const Notes = () => {
                   />
                 </form>
               )
-            ) : item.pinned ? (
+            ) : item?.pinned ? (
               <>
                 <div
                   className="note margin-t margin-b"
-                  key={item._id}
-                  style={{ backgroundColor: colors[item.colorIndex] }}
+                  key={item?._id}
+                  style={{ backgroundColor: colors[item?.colorIndex] }}
                 >
                   <div className="note-header">
-                    <h4 className="text-md">{item.title}</h4>
+                    <h4 className="text-md">{item?.title}</h4>
 
                     <img
                       src={pinned}
@@ -288,21 +303,28 @@ export const Notes = () => {
                     />
                   </div>
                   <div className="note-body text-sm text-justify">
-                    {item.body}
+                    {item?.body}
                   </div>
-                  {item.tags.length > 0 && (
+                  {item?.tags?.length && (
                     <div className="text-sm notes-tags margin-t">
                       Tags:{" "}
-                      {item.tags.map((tag) => (
-                        <span className="tag-chip text-sm margin-l">{tag}</span>
+                      {item?.tags?.map((tag) => (
+                        <span
+                          className="tag-chip text-sm margin-l"
+                          key={tag?._id}
+                        >
+                          {tag?.tag}
+                        </span>
                       ))}
                     </div>
                   )}
                   <div className="text-sm notes-priority margin-t">
-                    Priority: {item.priority}
+                    Priority: {item?.priority}
                   </div>
                   <div className="note-footer text-sm margin-t margin-b">
-                    <div className="date">Created on {item.date}</div>
+                    <div className="date">
+                      Created on {item?.date?.toString()}
+                    </div>
                     <div className="action-icons margin-r">
                       <img
                         src={edits}
@@ -334,23 +356,23 @@ export const Notes = () => {
               </>
             ) : null;
           })}
-        {filtereddata.length > 0 && <h2>Other Notes</h2>}
+        {filtereddata?.length > 0 && <h2>Other Notes</h2>}
         {filtereddata &&
-          filtereddata.map((item) => {
-            return editId === item._id ? (
-              edit && !item.pinned && (
+          filtereddata?.map((item) => {
+            return editId === item?._id ? (
+              edit && !item?.pinned && (
                 <form
                   onSubmit={updateNote}
                   autoComplete="off"
                   className="note margin-t margin-b"
-                  style={{ backgroundColor: colors[editData.colorIndex] }}
+                  style={{ backgroundColor: colors[editData?.colorIndex] }}
                 >
                   <div className="note-header">
                     <h4 className="text-md">
                       <input
                         type="text"
                         name="notetitle"
-                        value={editData.title}
+                        value={editData?.title}
                         className="margin-l note-title text-lg"
                         onChange={(e) =>
                           setEditData({ ...editData, title: e.target.value })
@@ -360,10 +382,10 @@ export const Notes = () => {
                   </div>
                   <div className="note-body text-sm text-justify">
                     <textarea
-                      value={editData.body}
+                      value={editData?.body}
                       className="notes-body"
                       name="notebody"
-                      style={{ backgroundColor: colors[editData.colorIndex] }}
+                      style={{ backgroundColor: colors[editData?.colorIndex] }}
                       onChange={(e) =>
                         setEditData({ ...editData, body: e.target.value })
                       }
@@ -374,10 +396,13 @@ export const Notes = () => {
                     <input
                       type="text"
                       name="notelabel"
-                      value={editData.tags[0]}
+                      // value={editData?.tags[0]?.tag}
                       placeholder="Enter tag here..."
                       onChange={(e) =>
-                        setEditData({ ...editData, tags: [e.target.value] })
+                        setEditData({
+                          ...editData,
+                          tags: [{ _id: uuid(), tag: e.target.value }],
+                        })
                       }
                     />
                   )}
@@ -413,11 +438,11 @@ export const Notes = () => {
               <>
                 <div
                   className="note margin-t margin-b"
-                  key={item._id}
-                  style={{ backgroundColor: colors[item.colorIndex] }}
+                  key={item?._id}
+                  style={{ backgroundColor: colors[item?.colorIndex] }}
                 >
                   <div className="note-header">
-                    <h4 className="text-md">{item.title}</h4>
+                    <h4 className="text-md">{item?.title}</h4>
 
                     <img
                       src={pin}
@@ -429,19 +454,28 @@ export const Notes = () => {
                   <div className="note-body text-sm text-justify">
                     {item.body}
                   </div>
-                  {item.tags.length > 0 && (
+                  {item?.tags?.length && (
                     <div className="text-sm notes-tags margin-t">
                       Tags:{" "}
-                      {item.tags.map((tag) => (
-                        <span className="tag-chip text-sm margin-l">{tag}</span>
-                      ))}
+                      {item?.tags?.map((tag) => {
+                        return (
+                          <span
+                            className="tag-chip text-sm margin-l"
+                            key={tag._id}
+                          >
+                            {tag?.tag}
+                          </span>
+                        );
+                      })}
                     </div>
                   )}
                   <div className="text-sm notes-priority margin-t">
-                    Priority: {item.priority}
+                    Priority: {item?.priority}
                   </div>
                   <div className="note-footer text-sm margin-t margin-b">
-                    <div className="date">Created on {item.date}</div>
+                    <div className="date">
+                      Created on {item?.date?.toString()}
+                    </div>
                     <div className="action-icons margin-r">
                       <img
                         src={edits}

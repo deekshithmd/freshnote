@@ -6,7 +6,6 @@ export const Profile = () => {
   const { setToken, user } = useAuth();
   const { data } = useData();
   const navigate = useNavigate();
-  console.log("useR", user);
 
   const logoutHandler = () => {
     setToken(false);

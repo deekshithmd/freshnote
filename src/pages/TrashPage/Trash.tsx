@@ -1,4 +1,3 @@
-import React from "react";
 import "../NotesPage/notes.css"
 import { Siderbar,Trash } from "../../components";
 export const TrashPage = () => {

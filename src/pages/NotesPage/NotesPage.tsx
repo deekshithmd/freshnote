@@ -1,4 +1,3 @@
-import React from "react";
 import "./notes.css"
 import { Siderbar } from "../../components";
 import { Notes } from "../../components";
