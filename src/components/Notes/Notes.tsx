@@ -458,7 +458,6 @@ export const Notes = () => {
                     <div className="text-sm notes-tags margin-t">
                       Tags:{" "}
                       {item?.tags?.map((tag) => {
-                        console.log("tag", item.tags);
                         return (
                           <span
                             className="tag-chip text-sm margin-l"
