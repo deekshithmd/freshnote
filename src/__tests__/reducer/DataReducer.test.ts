@@ -1,19 +1,29 @@
 import { DataReducer } from "../../contexts/Reducer/DataReducer";
+import { reducerType } from "../../contexts/Reducer/Datareducer.type";
 
 describe("Testing Notes", () => {
   it("Add notes", () => {
     let initialState = {
       archives: [],
       filtered: [],
-      labels: ["college", "work", "reminder"],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [],
       pinned: [],
       trash: [],
+      others: [],
     };
     let finalState = {
       archives: [],
       filtered: [],
-      labels: ["college", "work", "reminder"],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [
         {
           body: "body",
@@ -21,15 +31,16 @@ describe("Testing Notes", () => {
           date: "6/18/2022",
           pinned: false,
           priority: "low",
-          tags: ["work"],
+          tags: [{ _id: "2", tag: "work" }],
           title: "title1",
           _id: 1,
         },
       ],
       pinned: [],
       trash: [],
+      others: [],
     };
-    const actions = {
+    const actions: reducerType = {
       type: "LOAD_NOTES",
       payload: [
         {
@@ -38,7 +49,7 @@ describe("Testing Notes", () => {
           date: "6/18/2022",
           pinned: false,
           priority: "low",
-          tags: ["work"],
+          tags: [{ _id: "2", tag: "work" }],
           title: "title1",
           _id: 1,
         },
@@ -133,6 +144,7 @@ describe("Testing Notes", () => {
       notes: [],
       pinned: [],
       trash: [],
+      others: [],
     };
 
     let finalState = {
