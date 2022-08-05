@@ -1,9 +1,10 @@
 import { DataReducer } from "../../contexts/Reducer/DataReducer";
 import { reducerType } from "../../contexts/Reducer/Datareducer.type";
+import { initialStateType } from "../../contexts/DataContext/DataContext.type";
 
 describe("Testing Notes", () => {
   it("Add notes", () => {
-    let initialState = {
+    let initialState: initialStateType = {
       archives: [],
       filtered: [],
       labels: [
@@ -60,18 +61,27 @@ describe("Testing Notes", () => {
   });
 
   it("Pin note", () => {
-    let initialState = {
+    let initialState: initialStateType = {
       archives: [],
       filtered: [],
-      labels: ["college", "work", "reminder"],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [],
       pinned: [],
       trash: [],
+      others: [],
     };
     let finalState = {
       archives: [],
       filtered: [],
-      labels: ["college", "work", "reminder"],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [],
       pinned: [
         {
@@ -80,14 +90,15 @@ describe("Testing Notes", () => {
           date: "6/18/2022",
           pinned: false,
           priority: "low",
-          tags: ["work"],
+          tags: [{ _id: "2", tag: "work" }],
           title: "title1",
           _id: 1,
         },
       ],
       trash: [],
+      others: [],
     };
-    const actions = {
+    const actions: reducerType = {
       type: "PINNOTE",
       payload: {
         body: "body",
@@ -95,7 +106,7 @@ describe("Testing Notes", () => {
         date: "6/18/2022",
         pinned: false,
         priority: "low",
-        tags: ["work"],
+        tags: [{ _id: "2", tag: "work" }],
         title: "title1",
         _id: 1,
       },
@@ -104,23 +115,33 @@ describe("Testing Notes", () => {
     expect(finalState).toEqual(state);
   });
   it("Remove pin", () => {
-    let initialState = {
+    let initialState: initialStateType = {
       archives: [],
       filtered: [],
-      labels: ["college", "work", "reminder"],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [],
       pinned: [],
       trash: [],
+      others: [],
     };
     let finalState = {
       archives: [],
       filtered: [],
-      labels: ["college", "work", "reminder"],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [],
       pinned: [],
       trash: [],
+      others: [],
     };
-    const actions = {
+    const actions: reducerType = {
       type: "REMOVEPIN",
       payload: {
         body: "body",
@@ -128,7 +149,7 @@ describe("Testing Notes", () => {
         date: "6/18/2022",
         pinned: false,
         priority: "low",
-        tags: ["work"],
+        tags: [{ _id: "2", tag: "work" }],
         title: "title1",
         _id: 1,
       },
@@ -137,10 +158,14 @@ describe("Testing Notes", () => {
     expect(finalState).toEqual(state);
   });
   it("Add Archives", () => {
-    let initialState = {
+    let initialState: initialStateType = {
       archives: [],
       filtered: [],
-      labels: ["college", "work", "reminder"],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [],
       pinned: [],
       trash: [],
@@ -155,19 +180,24 @@ describe("Testing Notes", () => {
           date: "6/18/2022",
           pinned: false,
           priority: "low",
-          tags: ["work"],
+          tags: [{ _id: "2", tag: "work" }],
           title: "title1",
           _id: 1,
         },
       ],
       filtered: [],
-      labels: ["college", "work", "reminder"],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [],
       pinned: [],
       trash: [],
+      others: [],
     };
 
-    const actions = {
+    const actions: reducerType = {
       type: "LOAD_ARCHIVES",
       payload: [
         {
@@ -176,7 +206,7 @@ describe("Testing Notes", () => {
           date: "6/18/2022",
           pinned: false,
           priority: "low",
-          tags: ["work"],
+          tags: [{ _id: "2", tag: "work" }],
           title: "title1",
           _id: 1,
         },
@@ -187,18 +217,27 @@ describe("Testing Notes", () => {
     expect(state).toEqual(finalState);
   });
   it("Add to trash", () => {
-    let initialState = {
+    let initialState: initialStateType = {
       archives: [],
       filtered: [],
-      labels: [],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [],
       pinned: [],
       trash: [],
+      others: [],
     };
     let finalState = {
       archives: [],
       filtered: [],
-      labels: [],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [],
       pinned: [],
       trash: [
@@ -208,13 +247,14 @@ describe("Testing Notes", () => {
           date: "6/18/2022",
           pinned: false,
           priority: "low",
-          tags: ["work"],
+          tags: [{ _id: "2", tag: "work" }],
           title: "title1",
           _id: 1,
         },
       ],
+      others: [],
     };
-    const actions = {
+    const actions: reducerType = {
       type: "ADD_TRASH",
       payload: {
         body: "body",
@@ -222,7 +262,7 @@ describe("Testing Notes", () => {
         date: "6/18/2022",
         pinned: false,
         priority: "low",
-        tags: ["work"],
+        tags: [{ _id: "2", tag: "work" }],
         title: "title1",
         _id: 1,
       },
@@ -231,10 +271,14 @@ describe("Testing Notes", () => {
     expect(finalState).toEqual(state);
   });
   it("Delete from trash", () => {
-    let initialState = {
+    let initialState: initialStateType = {
       archives: [],
       filtered: [],
-      labels: [],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [],
       pinned: [],
       trash: [
@@ -244,21 +288,27 @@ describe("Testing Notes", () => {
           date: "6/18/2022",
           pinned: false,
           priority: "low",
-          tags: ["work"],
+          tags: [{ _id: "2", tag: "work" }],
           title: "title1",
           _id: 1,
         },
       ],
+      others: [],
     };
     let finalState = {
       archives: [],
       filtered: [],
-      labels: [],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [],
       pinned: [],
       trash: [],
+      others: [],
     };
-    const actions = {
+    const actions: reducerType = {
       type: "DELETE_TRASH",
       payload: 1,
     };
@@ -266,91 +316,100 @@ describe("Testing Notes", () => {
     expect(finalState).toEqual(state);
   });
   it("Add label", () => {
-    let initialState = {
+    let initialState: initialStateType = {
       archives: [],
       filtered: [],
       labels: [
         {
-          _id: 1,
+          _id: "2",
           tag: "work",
         },
       ],
       notes: [],
       pinned: [],
       trash: [],
+      others: [],
     };
 
-    const action = {
+    const action: reducerType = {
       type: "ADD_LABEL",
-      payload: { _id: 2, tag: "reminder" },
+      payload: { _id: "3", tag: "reminder" },
     };
     const finalState = {
       archives: [],
       filtered: [],
       labels: [
         {
-          _id: 1,
+          _id: "2",
           tag: "work",
         },
         {
-          _id: 2,
+          _id: "3",
           tag: "reminder",
         },
       ],
       notes: [],
       pinned: [],
       trash: [],
+      others: [],
     };
     const state = DataReducer(initialState, action);
     expect(state).toEqual(finalState);
   });
   it("Delete labels", () => {
-    let initialState = {
+    let initialState: initialStateType = {
       archives: [],
       filtered: [],
       labels: [
         {
-          _id: 1,
+          _id: "1",
           tag: "work",
         },
         {
-          _id: 2,
+          _id: "2",
           tag: "reminder",
         },
       ],
       notes: [],
       pinned: [],
       trash: [],
+      others: [],
     };
 
-    const action = {
+    const action: reducerType = {
       type: "DELETE_LABEL",
-      payload: 2,
+      payload: "2",
     };
     const finalState = {
       archives: [],
       filtered: [],
       labels: [
         {
-          _id: 1,
+          _id: "1",
           tag: "work",
         },
       ],
       notes: [],
       pinned: [],
       trash: [],
+      others: [],
     };
     const state = DataReducer(initialState, action);
     expect(state).toEqual(finalState);
   });
   it("Filter", () => {
-    let initialState = {
+    let initialState: initialStateType = {
       archives: [],
       filtered: [],
-      labels: [],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [],
       pinned: [],
       trash: [],
+      others: [],
     };
     let finalState = {
       archives: [],
@@ -361,17 +420,22 @@ describe("Testing Notes", () => {
           date: "6/18/2022",
           pinned: false,
           priority: "low",
-          tags: ["work"],
+          tags: [{ _id: "2", tag: "work" }],
           title: "title1",
           _id: 1,
         },
       ],
-      labels: [],
+      labels: [
+        { _id: "1", tag: "college" },
+        { _id: "2", tag: "work" },
+        { _id: "3", tag: "reminder" },
+      ],
       notes: [],
       pinned: [],
       trash: [],
+      others:[]
     };
-    const actions = {
+    const actions: reducerType = {
       type: "FILTER",
       payload: [
         {
@@ -380,7 +444,7 @@ describe("Testing Notes", () => {
           date: "6/18/2022",
           pinned: false,
           priority: "low",
-          tags: ["work"],
+          tags: [{ _id: "2", tag: "work" }],
           title: "title1",
           _id: 1,
         },

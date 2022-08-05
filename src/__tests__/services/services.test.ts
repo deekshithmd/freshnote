@@ -14,7 +14,7 @@ jest.mock("axios");
 
 describe("Api call tests", () => {
   it("Test for getNotes", async () => {
-    axios.get.mockResolvedValue({
+    (axios.get as jest.Mock).mockResolvedValue({
       data: {
         notes: [
           {
@@ -34,7 +34,6 @@ describe("Api call tests", () => {
       encodedToken: "asdadsafdfjkdfkdlgdfggkdfg",
     };
     const result = await getNotes(data);
-    console.log("result", result);
     expect(result).toEqual({
       data: {
         notes: [
@@ -54,7 +53,7 @@ describe("Api call tests", () => {
   });
 
   it("Test for add notes", async () => {
-    axios.post.mockResolvedValue({
+    (axios.post as jest.Mock).mockResolvedValue({
       data: {
         notes: [
           {
@@ -63,7 +62,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
@@ -78,7 +77,7 @@ describe("Api call tests", () => {
         date: "6/18/2022",
         pinned: false,
         priority: "low",
-        tags: ["work"],
+        tags: [{ _id: "2", tag: "work" }],
         title: "title1",
         _id: 1,
       },
@@ -94,7 +93,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
@@ -103,7 +102,7 @@ describe("Api call tests", () => {
     });
   });
   it("Update notes", async () => {
-    axios.post.mockResolvedValue({
+    (axios.post as jest.Mock).mockResolvedValue({
       data: {
         notes: [
           {
@@ -112,7 +111,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
@@ -128,7 +127,7 @@ describe("Api call tests", () => {
         date: "6/18/2022",
         pinned: false,
         priority: "low",
-        tags: ["work"],
+        tags: [{ _id: "2", tag: "work" }],
         title: "title1",
         _id: 1,
       },
@@ -144,7 +143,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
@@ -153,7 +152,7 @@ describe("Api call tests", () => {
     });
   });
   it("Delete notes", async () => {
-    axios.delete.mockResolvedValue({
+    (axios.delete as jest.Mock).mockResolvedValue({
       data: {
         notes: [
           {
@@ -162,7 +161,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
@@ -184,7 +183,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
@@ -193,7 +192,7 @@ describe("Api call tests", () => {
     });
   });
   it("Get archived notes", async () => {
-    axios.get.mockResolvedValue({
+    (axios.get as jest.Mock).mockResolvedValue({
       data: {
         archives: [
           {
@@ -202,7 +201,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
@@ -223,7 +222,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
@@ -232,7 +231,7 @@ describe("Api call tests", () => {
     });
   });
   it("Archiving notes", async () => {
-    axios.post.mockResolvedValue({
+    (axios.post as jest.Mock).mockResolvedValue({
       data: {
         archives: [
           {
@@ -241,7 +240,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
@@ -256,7 +255,7 @@ describe("Api call tests", () => {
         date: "6/18/2022",
         pinned: false,
         priority: "low",
-        tags: ["work"],
+        tags: [{ _id: "2", tag: "work" }],
         title: "title1",
         _id: 1,
       },
@@ -273,7 +272,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
@@ -282,7 +281,7 @@ describe("Api call tests", () => {
     });
   });
   it("Restoring archived notes", async () => {
-    axios.post.mockResolvedValue({
+    (axios.post as jest.Mock).mockResolvedValue({
       data: {
         notes: [
           {
@@ -291,7 +290,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
@@ -313,7 +312,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
@@ -323,7 +322,7 @@ describe("Api call tests", () => {
   });
 
   it("Deleting archived notes", async () => {
-    axios.delete.mockResolvedValue({
+    (axios.delete as jest.Mock).mockResolvedValue({
       data: {
         notes: [
           {
@@ -332,7 +331,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
@@ -354,7 +353,7 @@ describe("Api call tests", () => {
             date: "6/18/2022",
             pinned: false,
             priority: "low",
-            tags: ["work"],
+            tags: [{ _id: "2", tag: "work" }],
             title: "title1",
             _id: 1,
           },
