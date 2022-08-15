@@ -45,14 +45,16 @@ export const Archives = () => {
                 <div className="note-body text-sm text-justify">
                   {item?.body}
                 </div>
-                <div className="text-sm notes-tags margin-t">
-                  Tags:{" "}
-                  {item?.tags?.map((tag) => (
-                    <span className="tag-chip text-sm margin-l">
-                      {tag?.tag}
-                    </span>
-                  ))}
-                </div>
+                {item?.tags?.length ? (
+                  <div className="text-sm notes-tags margin-t">
+                    Tags:{" "}
+                    {item?.tags?.map((tag) => (
+                      <span className="tag-chip text-sm margin-l">
+                        {tag?.tag}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
                 <div className="text-sm notes-priority margin-t">
                   Priority: {item?.priority}
                 </div>
